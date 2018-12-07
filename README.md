@@ -2,4 +2,4 @@
 
 Managed by Clayton Lewis
 
-Used for Version control for Code Louisville Project
+Used for Code Louisville Project C# / .NET
