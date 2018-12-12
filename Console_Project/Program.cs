@@ -1,8 +1,11 @@
 ﻿/*
     Team Treehouse
-    Current Version - 0.1
+    Current Version - 1.0
     Date - 12/12/18
     Author - Clayton Lewis
+
+    Version 1.0 - 12/12/18
+        - Testing and setting up VSCode
 */
 
 using System;
