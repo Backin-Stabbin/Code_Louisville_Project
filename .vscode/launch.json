@@ -6,7 +6,7 @@
            "type": "coreclr",
            "request": "launch",
            "preLaunchTask": "Team Treehouse",
-           "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/Team_Treehouse.dll",
+           "program": "${workspaceFolder}/Console_Project/bin/Debug/netcoreapp2.2/Team_Treehouse.dll",
            "args": [],
            "cwd": "${workspaceFolder}",
            "stopAtEntry": false,

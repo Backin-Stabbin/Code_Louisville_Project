@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Team_Treehouse.csproj",
+      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Console_Project\\Team_Treehouse.csproj",
       "projectName": "Team_Treehouse",
-      "projectPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Team_Treehouse.csproj",
+      "projectPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Console_Project\\Team_Treehouse.csproj",
       "packagesPath": "C:\\Users\\a502690530\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\obj\\",
+      "outputPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Console_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

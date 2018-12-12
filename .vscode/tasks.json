@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Team_Treehouse.csproj"
+                "${workspaceFolder}/Console_Project/Team_Treehouse.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

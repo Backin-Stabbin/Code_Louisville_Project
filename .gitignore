@@ -1,0 +1,12 @@
+# Ignoring these folders
+*Logs/
+*scriptcs_bin/
+
+# Ignoring these file types
+*.msi
+*.exe
+*.zip
+*.rar
+*.7z
+*.code-workspace
+tempCodeRunnerFile.cs
