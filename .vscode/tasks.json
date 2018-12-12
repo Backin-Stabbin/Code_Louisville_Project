@@ -1,0 +1,15 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Team Treehouse",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Team_Treehouse.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

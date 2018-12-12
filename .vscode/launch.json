@@ -1,0 +1,16 @@
+{
+   "version": "0.2.0",
+   "configurations": [
+       {
+           "name": "Team Treehouse",
+           "type": "coreclr",
+           "request": "launch",
+           "preLaunchTask": "Team Treehouse",
+           "program": "${workspaceFolder}/bin/Debug/netcoreapp2.2/Team_Treehouse.dll",
+           "args": [],
+           "cwd": "${workspaceFolder}",
+           "stopAtEntry": false,
+           "console": "internalConsole"
+       }
+    ,]
+}
