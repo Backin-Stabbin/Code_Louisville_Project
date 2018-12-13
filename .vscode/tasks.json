@@ -10,6 +10,16 @@
                 "${workspaceFolder}/Console_Project/Team_Treehouse.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Object_Project",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Object_Project/Object_Project.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }

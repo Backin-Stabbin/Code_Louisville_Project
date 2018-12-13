@@ -11,6 +11,17 @@
            "cwd": "${workspaceFolder}",
            "stopAtEntry": false,
            "console": "internalConsole"
-       }
-    ,]
+       },
+       {
+        "name": "Object_Project",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "Object_Project",
+        "program": "${workspaceFolder}/Object_Project/bin/Debug/netcoreapp2.2/Object_Project.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    }
+    ]
 }
