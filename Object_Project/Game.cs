@@ -34,11 +34,12 @@ namespace TreehouseDefense {
                     }
                 );
 
-                MapLocation location = path.GetLocationAt(8);
+                Invader invader = new Invader();
+                MapLocation location = new MapLocation(0, 0, map);
 
-                if(location != null) {
-                    Console.WriteLine(location.X + "," + location.Y);
-                }
+                invader.Location = location;
+
+                location = invader.Location;
             }
             catch (OutOfBoundsException ex) {
                 Console.WriteLine(ex.Message);
