@@ -1,9 +1,0 @@
-double[] lapTimes = new double[4];
-double lap3 = 2.2;
-lapTimes[0] = 2.2;
-
-double[] finalLapTimes = {2.2,2.3,2.5,2.8};
-
-finalLapTimes[2] = lap3;
-
-finalLapTimes
