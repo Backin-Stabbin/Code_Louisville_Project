@@ -16,7 +16,7 @@ namespace Treehouse.FitnessFrog
     {
         static void Main()
         {
-            double runningTotal = 0;
+            var runningTotal = 0.0;
             
             while (true) {
                 // Prompt user for minutes exercised 
