@@ -18,9 +18,17 @@ namespace TreehouseDefense {
         static void Main () {
 
             Map map = new Map (8, 5);
-            Point point = new Point (5, 4);
+            
+            try {
+                MapLocation mapLocation = new MapLocation(20, 20, map);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
 
-            int area = map.Width + map.Height;
+            }
+
+            Console.ReadKey();
+
         }
     }
 }
