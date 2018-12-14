@@ -1,8 +1,7 @@
 
-
 namespace TreehouseDefense {
 
     class Invader {
-        
+
     }
 }

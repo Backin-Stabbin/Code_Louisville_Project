@@ -2,6 +2,6 @@
 namespace TreehouseDefense {
 
     class Tower {
-        
+
     }
 }

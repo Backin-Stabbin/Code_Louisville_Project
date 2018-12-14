@@ -2,6 +2,7 @@
 namespace TreehouseDefense {
 
     class Map {
+
         public readonly int Width;
         public readonly int Height;
 
@@ -10,10 +11,11 @@ namespace TreehouseDefense {
             Height = height;
         }
 
-        public bool OnMap(Point point) {
+        public bool OnMap (Point point) {
 
             bool inBounds = point.X >= 0 && point.X < Width && point.Y >= 0 && point.Y < Height;
 
-            return inBounds;        }
+            return inBounds;
+        }
     }
 }
