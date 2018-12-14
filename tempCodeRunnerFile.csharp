@@ -1,24 +1,9 @@
-using System;
+double[] lapTimes = new double[4];
+double lap3 = 2.2;
+lapTimes[0] = 2.2;
 
-class Polygon {
-    public readonly int NumSides;
+double[] finalLapTimes = {2.2,2.3,2.5,2.8};
 
-    public Polygon (int numSides) {
-        NumSides = numSides;
-    }
-}
+finalLapTimes[2] = lap3;
 
-class Square : Polygon {
-
-    public readonly int SideLength;
-
-    public Square (int sideLength) : base (sideLength) {
-        SideLength = sideLength;
-
-    }
-
-}
-
-Square square = new Square(3);
-
-Console.WriteLine(sideLength);
+finalLapTimes

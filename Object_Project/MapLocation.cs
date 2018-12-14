@@ -10,7 +10,6 @@ namespace TreehouseDefense {
                 throw new OutOfBoundsException(x + "," + y + " is outside the boundaries of the map.");
 
             }
-
         }
     }
 }
