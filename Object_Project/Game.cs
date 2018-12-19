@@ -33,13 +33,7 @@ namespace TreehouseDefense {
                         new MapLocation(7, 2, map),
                     }
                 );
-
-                Invader invader = new Invader();
-                MapLocation location = new MapLocation(0, 0, map);
-
-                invader.Location = location;
-
-                location = invader.Location;
+                
             }
             catch (OutOfBoundsException ex) {
                 Console.WriteLine(ex.Message);
@@ -51,8 +45,9 @@ namespace TreehouseDefense {
                 Console.WriteLine("Unhandled Exception" + ex);
             }
 
-            Console.ReadKey();
 
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
         }
     }
 }
