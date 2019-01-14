@@ -22,6 +22,17 @@
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
         "console": "internalConsole"
+    },
+    {
+        "name": "CL_Project",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "CL_Project",
+        "program": "${workspaceFolder}/CL_Project/bin/Debug/netcoreapp2.2/CL_Project.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
     }
     ]
 }

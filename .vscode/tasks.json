@@ -20,6 +20,16 @@
                 "${workspaceFolder}/Object_Project/Object_Project.csproj"
             ],
             "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "CL_Project",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/CL_Project/CL_Project.csproj"
+            ],
+            "problemMatcher": "$msCompile"
         }
     ]
 }
