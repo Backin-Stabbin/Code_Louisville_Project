@@ -1,0 +1,11 @@
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Calculate_Hypotenuse.deps.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Calculate_Hypotenuse.runtimeconfig.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Calculate_Hypotenuse.runtimeconfig.dev.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Calculate_Hypotenuse.dll
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Calculate_Hypotenuse.pdb
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Calculate_Hypotenuse.csprojAssemblyReference.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Calculate_Hypotenuse.csproj.CoreCompileInputs.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Calculate_Hypotenuse.AssemblyInfoInputs.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Calculate_Hypotenuse.AssemblyInfo.cs
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Calculate_Hypotenuse.dll
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Calculate_Hypotenuse.pdb

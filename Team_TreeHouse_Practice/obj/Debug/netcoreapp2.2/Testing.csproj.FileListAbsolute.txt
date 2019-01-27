@@ -1,0 +1,11 @@
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Testing.csprojAssemblyReference.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Testing.csproj.CoreCompileInputs.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Testing.AssemblyInfoInputs.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Testing.AssemblyInfo.cs
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Testing.deps.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Testing.runtimeconfig.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Testing.runtimeconfig.dev.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Testing.dll
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\bin\Debug\netcoreapp2.2\Testing.pdb
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Testing.dll
+C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Testing.pdb
