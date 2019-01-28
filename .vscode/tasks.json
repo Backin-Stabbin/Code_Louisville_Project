@@ -2,32 +2,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Team Treehouse",
+            "label": "Treehouse_Defense",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Console_Project/Team_Treehouse.csproj"
+                "${workspaceFolder}/Treehouse_Defense/Treehouse_Defense.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Object_Project",
+            "label": "Final_Project",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Object_Project/Object_Project.csproj"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "CL_Project",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/CL_Project/CL_Project.csproj"
+                "${workspaceFolder}/Final_Project/Final_Project.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

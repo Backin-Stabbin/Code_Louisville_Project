@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Team_TreeHouse_Practice\\Calculate_Hypotenuse.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}
