@@ -2,22 +2,22 @@
    "version": "0.2.0",
    "configurations": [
        {
-           "name": "Team Treehouse",
+           "name": "Treehouse_Defense",
            "type": "coreclr",
            "request": "launch",
-           "preLaunchTask": "Team Treehouse",
-           "program": "${workspaceFolder}/Console_Project/bin/Debug/netcoreapp2.2/Team_Treehouse.dll",
+           "preLaunchTask": "Treehouse_Defense",
+           "program": "${workspaceFolder}/Treehouse_Defense/bin/Debug/netcoreapp2.2/Treehouse_Defense.dll",
            "args": [],
            "cwd": "${workspaceFolder}",
            "stopAtEntry": false,
            "console": "internalConsole"
        },
        {
-        "name": "Object_Project",
+        "name": "Final_Project",
         "type": "coreclr",
         "request": "launch",
-        "preLaunchTask": "Object_Project",
-        "program": "${workspaceFolder}/Object_Project/bin/Debug/netcoreapp2.2/Object_Project.dll",
+        "preLaunchTask": "Final_Project",
+        "program": "${workspaceFolder}/Final_Project/bin/Debug/netcoreapp2.2/Final_Project.dll",
         "args": [],
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
