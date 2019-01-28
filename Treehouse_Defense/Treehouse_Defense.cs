@@ -20,8 +20,8 @@ namespace TreehouseDefense {
                 );
 
                 Invader[] invaders = {
-                    new Invader (path),
-                    new Invader (path),
+                    new Shielded_Invader (path),
+                    new Fast_Invader (path),
                     new Invader (path),
                     new Invader (path)
                 };
