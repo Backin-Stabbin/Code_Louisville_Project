@@ -1,0 +1,11 @@
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\bin\Debug\netcoreapp2.2\Practice.deps.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\bin\Debug\netcoreapp2.2\Practice.runtimeconfig.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\bin\Debug\netcoreapp2.2\Practice.runtimeconfig.dev.json
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\bin\Debug\netcoreapp2.2\Practice.dll
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\bin\Debug\netcoreapp2.2\Practice.pdb
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\obj\Debug\netcoreapp2.2\Practice.csprojAssemblyReference.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\obj\Debug\netcoreapp2.2\Practice.csproj.CoreCompileInputs.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\obj\Debug\netcoreapp2.2\Practice.AssemblyInfoInputs.cache
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\obj\Debug\netcoreapp2.2\Practice.AssemblyInfo.cs
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\obj\Debug\netcoreapp2.2\Practice.dll
+C:\Users\a502690530\Desktop\Team_Treehouse\Practice\obj\Debug\netcoreapp2.2\Practice.pdb
