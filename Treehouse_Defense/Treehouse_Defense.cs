@@ -19,17 +19,24 @@ namespace TreehouseDefense {
                     }
                 );
 
+                MapLocation location = new MapLocation(0, 2, map);
+
+                if(path.IsOnPath(location)){
+                    Console.WriteLine(location + " is on the path");
+                    return;
+                }
+
                 Invader[] invaders = {
                     new Shielded_Invader (path),
                     new Fast_Invader (path),
-                    new Invader (path),
-                    new Invader (path)
+                    new Strong_Invader (path),
+                    new Basic_Invader (path)
                 };
 
                 Tower[] towers = {
                     new Tower (new MapLocation (1, 3, map)),
-                    new Tower (new MapLocation (3, 3, map)),
-                    new Tower (new MapLocation (5, 3, map))
+                    new Powerful_Tower (new MapLocation (3, 3, map)),
+                    new Sniper_Tower (new MapLocation (5, 3, map))
                 };
 
                 Level leve1 = new Level (invaders) {
