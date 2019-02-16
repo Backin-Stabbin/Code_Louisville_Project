@@ -24,19 +24,7 @@ namespace Code_Louisville{
                     connection.Open ();
                     SqlDataReader reader = myCommand.ExecuteReader ();
 
-                    while (reader.Read ()) {
-                        results.Add (
-                            (string) reader["ProductID"],
-                            (string) reader["ProductName"],
-                            (string) reader["Price"],
-                            (string) reader["ProductDescription"]
-                        );
-                    }
-
-                    foreach(Product_Info prod() in results){
-                        Console.WriteLine(prod);
-                    }
-
+                   
 
 
                     connection.Close ();

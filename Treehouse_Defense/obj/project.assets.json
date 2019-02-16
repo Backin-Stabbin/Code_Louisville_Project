@@ -692,24 +692,22 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Treehouse_Defense\\Treehouse_Defense.csproj",
+      "projectUniqueName": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Treehouse_Defense\\Treehouse_Defense.csproj",
       "projectName": "Treehouse_Defense",
-      "projectPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Treehouse_Defense\\Treehouse_Defense.csproj",
+      "projectPath": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Treehouse_Defense\\Treehouse_Defense.csproj",
       "packagesPath": "C:\\Users\\a502690530\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Treehouse_Defense\\obj\\",
+      "outputPath": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Treehouse_Defense\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\a502690530\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\a502690530\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
