@@ -4,7 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
-namespace Code_Louisville{
+namespace Code_Louisville {
     class Final_Project {
         static void Main () {
             try {
@@ -24,8 +24,18 @@ namespace Code_Louisville{
                     connection.Open ();
                     SqlDataReader reader = myCommand.ExecuteReader ();
 
-                   
+                    /*while (reader.Read ()) {
+                        results.Add (
+                            (string) reader["ProductID"],
+                            (string) reader["ProductName"],
+                            (string) reader["Price"],
+                            (string) reader["ProductDescription"]
+                        );
+                    }
 
+                    foreach (Product_Info prod () in results) {
+                        Console.WriteLine (prod);
+                    }*/
 
                     connection.Close ();
                 }
