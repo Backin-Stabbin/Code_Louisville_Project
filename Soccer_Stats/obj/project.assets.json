@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Treehouse_Defense\\Treehouse_Defense.csproj",
-      "projectName": "Treehouse_Defense",
-      "projectPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Treehouse_Defense\\Treehouse_Defense.csproj",
+      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Code_Louisville\\Soccer_Stats\\Soccer_Stats.csproj",
+      "projectName": "Soccer_Stats",
+      "projectPath": "C:\\Users\\a502690530\\Desktop\\Code_Louisville\\Soccer_Stats\\Soccer_Stats.csproj",
       "packagesPath": "C:\\Users\\a502690530\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Treehouse_Defense\\obj\\",
+      "outputPath": "C:\\Users\\a502690530\\Desktop\\Code_Louisville\\Soccer_Stats\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
