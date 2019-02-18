@@ -1169,7 +1169,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
       "Microsoft.NETCore.App >= 2.2.0",
-      "System.Data.SqlClient"
+      "System.Data.SqlClient >= 4.6.0"
     ]
   },
   "packageFolders": {
@@ -1221,7 +1221,7 @@
           },
           "System.Data.SqlClient": {
             "target": "Package",
-            "version": "(, )"
+            "version": "[4.6.0, )"
           }
         },
         "imports": [
