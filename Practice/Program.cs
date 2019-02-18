@@ -1,38 +1,11 @@
 ﻿using System;
 
-class MyProgram {
-    static void Main () {
+namespace Treehouse.CodeChallenges {
+    public abstract class SequenceDetector {
+        public virtual string Description => "";
 
-        //Console.WriteLine ();
-        //Console.WriteLine ("Press any key to close!");
-        //Console.ReadKey ();
-    }
-}
+        public int[] LastScannedSequence { get; protected set; }
 
-class SequenceDetector {
-    public virtual string Description => "";
-
-    public virtual bool Scan (int[] sequence) {
-        return true;
-    }
-}
-
-class RepeatDetector : SequenceDetector {
-
-    public override string Description => "Detects repetitions";
-
-    public override bool Scan (int[] sequence) {
-        if (sequence.Length < 2) {
-            return false;
-        }
-
-        for (int i = 1; i < sequence.Length; ++i) {
-            if (sequence[i] == sequence[i - 1]) {
-
-                return true;
-            }
-        }
-
-        return false;
+        public abstract bool Scan (int[] sequence);
     }
 }
