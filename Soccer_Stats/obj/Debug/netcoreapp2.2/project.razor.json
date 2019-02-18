@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Soccer_Stats\\Soccer_Stats.csproj",
+  "TargetFramework": "netcoreapp2.2",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}
