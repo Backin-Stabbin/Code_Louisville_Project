@@ -692,22 +692,24 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Media_Library\\Media_Library.csproj",
+      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Media_Library\\Media_Library.csproj",
       "projectName": "Media_Library",
-      "projectPath": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Media_Library\\Media_Library.csproj",
+      "projectPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Media_Library\\Media_Library.csproj",
       "packagesPath": "C:\\Users\\a502690530\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\a502690530\\Desktop\\Code_Louisville\\Media_Library\\obj\\",
+      "outputPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Media_Library\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\a502690530\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\a502690530\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

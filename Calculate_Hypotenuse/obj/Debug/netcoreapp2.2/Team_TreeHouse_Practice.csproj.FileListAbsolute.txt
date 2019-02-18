@@ -1,4 +1,0 @@
-C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Team_TreeHouse_Practice.csprojAssemblyReference.cache
-C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Team_TreeHouse_Practice.csproj.CoreCompileInputs.cache
-C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Team_TreeHouse_Practice.AssemblyInfoInputs.cache
-C:\Users\a502690530\Desktop\Team_Treehouse\Team_TreeHouse_Practice\obj\Debug\netcoreapp2.2\Team_TreeHouse_Practice.AssemblyInfo.cs
