@@ -2,17 +2,6 @@
    "version": "0.2.0",
    "configurations": [
        {
-           "name": "Treehouse_Defense",
-           "type": "coreclr",
-           "request": "launch",
-           "preLaunchTask": "Treehouse_Defense",
-           "program": "${workspaceFolder}/Treehouse_Defense/bin/Debug/netcoreapp2.2/Treehouse_Defense.dll",
-           "args": [],
-           "cwd": "${workspaceFolder}",
-           "stopAtEntry": false,
-           "console": "internalConsole"
-       },
-       {
         "name": "Final_Project",
         "type": "coreclr",
         "request": "launch",
@@ -20,6 +9,17 @@
         "program": "${workspaceFolder}/Final_Project/bin/Debug/netcoreapp2.2/Final_Project.dll",
         "args": [],
         "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    },
+    {
+        "name": "Soccer",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "Soccer",
+        "program": "${workspaceFolder}/Soccer_Stats/bin/Debug/netcoreapp2.2/Soccer_Stats.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}/Soccer_Stats",
         "stopAtEntry": false,
         "console": "internalConsole"
     }

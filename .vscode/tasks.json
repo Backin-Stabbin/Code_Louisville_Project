@@ -2,22 +2,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Treehouse_Defense",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/Treehouse_Defense/Treehouse_Defense.csproj"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
             "label": "Final_Project",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
                 "${workspaceFolder}/Final_Project/Final_Project.csproj"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "Soccer",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/Soccer_Stats/Soccer_Stats.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
