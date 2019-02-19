@@ -28,7 +28,7 @@ namespace Code_Louisville {
                         
                         var theProduct = new Product_Info (
 
-                            product_ID: reader.GetValue (0).ToString (),
+                            product_ID: reader.GetValue (0).ToString(),
                             product_Name: reader.GetValue (1).ToString (),
                             price: reader.GetValue (2).ToString (),
                             product_Description: reader.GetValue (3).ToString ()
