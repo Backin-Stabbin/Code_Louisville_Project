@@ -18,7 +18,7 @@ namespace Soccer_Stats {
             var players = DeserializePlayers(fileName);
 
             foreach(var player in players){
-                Console.WriteLine(player.SecondName);
+                Console.WriteLine(player.FirstName);
             }
         }
 
