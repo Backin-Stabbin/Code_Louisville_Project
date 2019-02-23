@@ -7,6 +7,17 @@ namespace Treehouse.CodeChallenges {
     public class Program {
         public static void Main (string[] arg) { }
 
+        public static List<WeatherForecast> DeserializeWeather(string fileName){
+            var weatherForecast = new List<WeatherForecast>();
+            using(var reader = new StreamReader(fileName))
+            using(var jsonReader = new JsonTextReader(reader)){
+                var serializer = new JsonSerializer();
+                weatherForecast = serializer.Deserialize<List<WeatherForecast>>(jsonReader);
+
+            }
+            return weatherForecast;
+        }
+
         public static WeatherForecast ParseWeatherForecast (string[] values) {
             var weatherForecast = new WeatherForecast ();
             weatherForecast.WeatherStationId = values[0];
@@ -30,14 +41,6 @@ namespace Treehouse.CodeChallenges {
                 weatherForecast.PrecipitationAmount = precipitation;
             }
             return weatherForecast;
-        }
-
-        public static List<WeatherForecast> DeserializeWeather(string fileName){
-            var weatherForecast = new List<WeatherForecast>();
-            using (var reader = new StreamReader(fileName))
-            using (var jsonReader = new JsonTextReader(reader)){
-                return weatherForecast;
-            }
         }
     }
 }
