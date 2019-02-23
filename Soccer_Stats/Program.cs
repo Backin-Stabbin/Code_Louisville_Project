@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace Soccer_Stats {
 
@@ -10,10 +12,14 @@ namespace Soccer_Stats {
 
             string currentdirectory = Directory.GetCurrentDirectory ();
             DirectoryInfo directory = new DirectoryInfo (currentdirectory);
-            var fileSoccerGameResultscsv = Path.Combine (directory.FullName, "SoccerGameResults.csv");
-            var fileContents = ReadSoccerResults (fileSoccerGameResultscsv);
+            var fileName = Path.Combine(directory.FullName, "SoccerGameResults.csv");
+            var fileContents = ReadSoccerResults (fileName);
+            fileName = Path.Combine(directory.FullName, "players.json");
+            var players = DeserializePlayers(fileName);
 
-            Console.WriteLine (fileContents.Count);
+            foreach(var player in players){
+                Console.WriteLine(player.SecondName);
+            }
         }
 
         public static string ReadFile (string fileName) {
@@ -23,6 +29,7 @@ namespace Soccer_Stats {
         }
 
         public static List<Game_Result> ReadSoccerResults (string fileName) {
+
             var soccerResults = new List<Game_Result> ();
             using (var reader = new StreamReader (fileName)) {
                 string line = "";
@@ -54,14 +61,25 @@ namespace Soccer_Stats {
                         gameResult.ShotsOffGoal = parseInt;
                     }
                     double possessionPercent;
-                    if (double.TryParse(values[7], out possessionPercent)){
+                    if (double.TryParse (values[7], out possessionPercent)) {
                         gameResult.PossessionPercent = possessionPercent;
                     }
-                    
+
                 }
 
             }
             return soccerResults;
+        }
+
+        public static List<Player> DeserializePlayers (string fileName) {
+            var players = new List<Player> ();
+            var serializer = new JsonSerializer ();
+            using (var reader = new StreamReader (fileName))
+            using (var jsonReader = new JsonTextReader(reader)) {
+                serializer.Deserialize<List<Player>>(jsonReader);
+
+            }
+            return players;
         }
     }
 }
