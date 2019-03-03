@@ -1,20 +1,38 @@
 using System;
 
-namespace Treehouse.MediaLibrary {
+namespace Treehouse.MediaLibrary
+{
+    class MediaType
+    {
+        public string Title;
+        public string Loanee;
+        public bool OnLoan;
+        
+        public MediaType(string title)
+        {
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new Exception("A media type must have a title.");
+            }
+            
+            Title = title;
+        }
 
-    class MediaType {
-        public string Loanee = null;
-        public bool OnLoan = false;
-
-        public void Loan (string loanee) {
-            Loanee = loanee;
+        public void Loan()
+        {
             OnLoan = true;
         }
-
-        public void Return () {
+        
+        public void Loan(string loanee)
+        {
+            Loanee = loanee;
+            Loan();
+        }
+        
+        public void Return()
+        {
             Loanee = null;
             OnLoan = false;
-        }
+        }        
     }
-
 }

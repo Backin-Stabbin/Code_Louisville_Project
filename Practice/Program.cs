@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-
 namespace Treehouse.CodeChallenges {
     public static class MathHelpers {
         public static List<int> GetPowersOf2(int UpperLimit) {
