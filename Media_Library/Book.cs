@@ -1,18 +1,18 @@
 namespace Treehouse.MediaLibrary
 {
-    class Movie : MediaType
+    class Book : MediaType
     {
-        public readonly string Director;
+        public readonly string Author;
         
-        public Movie(string title, string director)
+        public Book(string title, string author)
             : base(title)
         {
-            Director = director;
+            Author = author;
         }
 
         public string GetDisplayText()
         {
-            string text = "Movie: " + Title + " by " + Director;
+            string text = "Book: " + Title + " by " + Author;
             
             if (OnLoan)
             {

@@ -1,18 +1,18 @@
 namespace Treehouse.MediaLibrary
 {
-    class Movie : MediaType
+    class Album : MediaType
     {
-        public readonly string Director;
+        public readonly string Artist;
         
-        public Movie(string title, string director)
+        public Album(string title, string artist) 
             : base(title)
         {
-            Director = director;
+            Artist = artist;
         }
-
+        
         public string GetDisplayText()
         {
-            string text = "Movie: " + Title + " by " + Director;
+            string text = "Album: " + Title + " by " + Artist;
             
             if (OnLoan)
             {
@@ -30,3 +30,16 @@ namespace Treehouse.MediaLibrary
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
