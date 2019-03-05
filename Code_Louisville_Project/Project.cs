@@ -10,13 +10,11 @@ namespace Code_Louisville {
     class Project {
         static void Main() {
 
-            Console.Clear();
-
             try {
                 // List for Computers
                 var fileName = "Computer_Data.sqlite";
                 var computers = new List<Computer>();
-                var buildingChoice = "";
+                //var buildingChoice = "";
                 var buildingChoices = new List<string> {
                     "BLDG1",
                     "BLDG2",
@@ -61,7 +59,15 @@ namespace Code_Louisville {
                         ";
                 SQLiteCommand commandCreateData = new SQLiteCommand(sqlCreateData, m_dbConnection);
 
-                SQLiteDataReader reader = commandCreateData.ExecuteReader();
+                commandCreateData.ExecuteNonQuery();
+
+                var sqlSelectData = @"
+                        SELECT * FROM Computers;
+                        ";
+
+                SQLiteCommand commandSelectData = new SQLiteCommand(sqlSelectData, m_dbConnection);
+
+                var reader = commandSelectData.ExecuteReader();
 
                 while (reader.Read()) {
                     var theComputer = new Computer(
