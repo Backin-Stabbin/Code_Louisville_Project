@@ -6,8 +6,6 @@ namespace Code_Louisville {
 
         static public string DisplayBuildingMenu() {
 
-            Console.Clear();
-
             string buildingName = "";
             int selectionError = 0;
 
@@ -24,7 +22,7 @@ namespace Code_Louisville {
                 Console.WriteLine();
 
                 foreach (string building in Building.Get_List_Of_Buildings()) {
-                    Console.WriteLine(building.Split(" ") [1] + " - " + building);
+                    Console.WriteLine(building.Substring(building.Length - 1) + " - " + building.Replace("BLDG", "Building "));
                 }
 
                 Console.WriteLine("ALL - All Buildings");
@@ -33,27 +31,21 @@ namespace Code_Louisville {
 
                 var buildingSelection = Console.ReadLine();
 
-                switch (buildingSelection) {
-                    case "1":
-                        buildingName = "BLDG1";
-                        break;
-                    case "2":
-                        buildingName = "BLDG2";
-                        break;
-                    case "3":
-                        buildingName = "BLDG3";
-                        break;
-                    case "4":
-                        buildingName = "BLDG4";
-                        break;
-                    case "5":
-                        buildingName = "BLDG5";
-                        break;
-                    case "ALL":
-                        buildingName = "ALL";
-                        break;
+                foreach (string building in Building.Get_List_Of_Buildings()) {
+                    if (buildingSelection == building.Substring(building.Length - 1)) {
+                        buildingName = building;
+                        return buildingName;
+                    }
                 }
-                selectionError = 1;
+
+                if (buildingSelection == "ALL") {
+                    buildingName = buildingSelection;
+                    return buildingName;
+                }
+                else {
+                    selectionError = 1;
+                    buildingName = "";
+                }
             }
             return buildingName;
         }

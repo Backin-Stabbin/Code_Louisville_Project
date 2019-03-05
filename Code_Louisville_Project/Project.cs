@@ -51,6 +51,8 @@ namespace Code_Louisville {
                 var selectedComputers = Computer.SelectComputersFromBuilding(computers);
                 var headers = Computer.GetHeaders();
 
+                Console.Clear();
+
                 if (selectedComputers.Count > 0) {
                     Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
                         headers[0].PadRight(20), headers[1].PadRight(10), headers[2], headers[3]));
