@@ -4,48 +4,58 @@ namespace Code_Louisville {
 
     public class Menu {
 
-        static public string DisplayMenu() {
+        static public string DisplayBuildingMenu() {
+
+            Console.Clear();
 
             string buildingName = "";
-            int buildingSelection = 0;
+            int selectionError = 0;
 
             while (buildingName == "") {
-                Console.WriteLine("Would you like to work with one building or select all building?");
+                Console.Clear();
+
+                if (selectionError != 0) {
+                    Console.WriteLine();
+                    Console.WriteLine("Incorrect selection, please try again...");
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine("Would you like to work with one building or select all buildings?");
                 Console.WriteLine();
-                Console.WriteLine("1 - Building 1");
-                Console.WriteLine("2 - Building 2");
-                Console.WriteLine("3 - Building 3");
-                Console.WriteLine("4 - Building 4");
-                Console.WriteLine("5 - Building 5");
-                Console.WriteLine("6 - All Buildings");
+
+                foreach (string building in Building.Get_List_Of_Buildings()) {
+                    Console.WriteLine(building.Split(" ") [1] + " - " + building);
+                }
+
+                Console.WriteLine("ALL - All Buildings");
                 Console.WriteLine();
-                Console.Write("Choose an option [1-6] - ");
+                Console.Write("Choose option [1-5] or [ALL] - ");
 
-                buildingSelection = Convert.ToInt32(Console.ReadLine());
+                var buildingSelection = Console.ReadLine();
 
-                if (buildingSelection == 1) {
-                    buildingName = "BLDG1";
+                switch (buildingSelection) {
+                    case "1":
+                        buildingName = "BLDG1";
+                        break;
+                    case "2":
+                        buildingName = "BLDG2";
+                        break;
+                    case "3":
+                        buildingName = "BLDG3";
+                        break;
+                    case "4":
+                        buildingName = "BLDG4";
+                        break;
+                    case "5":
+                        buildingName = "BLDG5";
+                        break;
+                    case "ALL":
+                        buildingName = "ALL";
+                        break;
                 }
-                else if (buildingSelection == 2) {
-                    buildingName = "BLDG2";
-                }
-                else if (buildingSelection == 3) {
-                    buildingName = "BLDG3";
-                }
-                else if (buildingSelection == 4) {
-                    buildingName = "BLDG4";
-                }
-                else if (buildingSelection == 5) {
-                    buildingName = "BLDG5";
-                }
-                else if (buildingSelection == 6) {
-                    buildingName = "ALL";
-                }
-
+                selectionError = 1;
             }
             return buildingName;
-
         }
-
     }
 }

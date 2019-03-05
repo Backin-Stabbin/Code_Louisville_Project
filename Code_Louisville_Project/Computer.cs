@@ -20,7 +20,7 @@ namespace Code_Louisville {
 
         public static List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput) {
 
-            var buildingSelection = Menu.DisplayMenu();
+            var buildingSelection = Menu.DisplayBuildingMenu();
 
             if (buildingSelection == "ALL") {
                 return computerListInput;

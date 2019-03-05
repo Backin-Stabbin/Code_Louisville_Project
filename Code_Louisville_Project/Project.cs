@@ -9,43 +9,8 @@ namespace Code_Louisville {
             Console.Clear();
 
             try {
-
-                string sqlCreateTable = @"
-                        CREATE TABLE Computers (
-                            Computer_Name VARCHAR(20) PRIMARY KEY NOT NULL,
-                            Building VARCHAR(25) NOT NULL,
-                            Physical_Machine BIT NOT NULL DEFAULT '1',
-                            Active BIT NOT NULL DEFAULT '0'
-                        );
-                    ";
-                var sqlCreateData = @"
-                    INSERT INTO Computers
-                        (Computer_Name, Building, Physical_Machine, Active)
-                    VALUES
-                        ('Computer-013', 'BLDG1', FALSE, TRUE),
-                        ('Computer-014', 'BLDG1', FALSE, TRUE);
-                    ";
-                var sqlSelectData = @"
-                    SELECT * FROM Computers;
-                    ";
-
-                //
-                // To do List
-                //
+                // Used for list of Computers
                 var computers = new List<Computer>();
-                //var buildingChoice = "";
-
-                // Prompting to choose a building
-                /*while (!buildingChoices.Contains(buildingChoice)) {
-                    Console.WriteLine("
-                    Test ");
-
-                }*/
-
-                //
-                //
-                // Getting List of Building
-                var buildingChoices = Building.Get_List_Of_Buildings();
 
                 // Creating DB Instance
                 var dataBase = new Database();
@@ -60,13 +25,13 @@ namespace Code_Louisville {
                 dataBase.DBConnection.Open();
 
                 // Creating Computers Table
-                Database.Create_DB_Table(dataBase, sqlCreateTable);
+                Database.Create_DB_Table(dataBase);
 
                 // Inserting Data to DB Table
-                Database.Insert_Data_To_Table(dataBase, sqlCreateData);
+                Database.Insert_Data_To_Table(dataBase);
 
                 // Reading Data from DB
-                var reader = Database.Read_DB_Data(dataBase, sqlSelectData);
+                var reader = Database.Read_DB_Data(dataBase);
 
                 // Adding data to computer list
                 while (reader.Read()) {
