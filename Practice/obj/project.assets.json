@@ -741,11 +741,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Practice\\Practice.csproj",
+      "projectUniqueName": "C:\\Users\\a502690530\\Desktop\\Code_Louisville\\Practice\\Practice.csproj",
       "projectName": "Practice",
-      "projectPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Practice\\Practice.csproj",
+      "projectPath": "C:\\Users\\a502690530\\Desktop\\Code_Louisville\\Practice\\Practice.csproj",
       "packagesPath": "C:\\Users\\a502690530\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\a502690530\\Desktop\\Team_Treehouse\\Practice\\obj\\",
+      "outputPath": "C:\\Users\\a502690530\\Desktop\\Code_Louisville\\Practice\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
