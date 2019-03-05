@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SQLite;
-using System.IO;
-using System.Linq;
-using System.Text;
 
 namespace Code_Louisville {
     class Project {
@@ -13,21 +9,15 @@ namespace Code_Louisville {
             Console.Clear();
 
             try {
-                // List for Computers
-                var fileName = "Computer_Data.sqlite";
+
+                // Creating DB File
+                Database.Create_DB_File();
+
+                // Getting List of Building
+                var buildingChoices = Building.Get_List_Of_Buildings();
+
                 var computers = new List<Computer>();
                 //var buildingChoice = "";
-                var buildingChoices = new List<string> {
-                    "BLDG1",
-                    "BLDG2",
-                    "BLDG3",
-                    "BLDG4",
-                    "BLDG5"
-                };
-
-                if (File.Exists(fileName)) {
-                    File.Delete(fileName);
-                }
 
                 SQLiteConnection.CreateFile("Computer_Data.sqlite");
                 SQLiteConnection m_dbConnection;
