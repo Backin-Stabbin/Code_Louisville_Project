@@ -2,22 +2,22 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Final_Project",
+            "label": "Code_Louisville_Project",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Final_Project/Final_Project.csproj"
+                "${workspaceFolder}/Code_Louisville_Project/.csproj"
             ],
             "problemMatcher": "$msCompile"
         },
         {
-            "label": "Soccer",
+            "label": "Practice",
             "command": "dotnet",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Soccer_Stats/Soccer_Stats.csproj"
+                "${workspaceFolder}/Practice/Practice.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

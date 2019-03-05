@@ -1,27 +1,27 @@
 {
-   "version": "0.2.0",
-   "configurations": [
-       {
-        "name": "Final_Project",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "Final_Project",
-        "program": "${workspaceFolder}/Final_Project/bin/Debug/netcoreapp2.2/Final_Project.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/Final_Project",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    },
-    {
-        "name": "Soccer",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "Soccer",
-        "program": "${workspaceFolder}/Soccer_Stats/bin/Debug/netcoreapp2.2/Soccer_Stats.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/Soccer_Stats",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    }
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Code_Louisville_Project",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Code_Louisville_Project",
+            "program": "${workspaceFolder}/Code_Louisville_Project/bin/Debug/netcoreapp2.2/Project.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Code_Louisville_Project",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "Practice",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "Practice",
+            "program": "${workspaceFolder}/Practice/bin/Debug/netcoreapp2.2/Practice.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Practice",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
     ]
 }
