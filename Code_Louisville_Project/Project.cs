@@ -6,7 +6,7 @@ namespace Code_Louisville {
     class Project {
         static void Main() {
 
-            //Console.Clear();
+            Console.Clear();
 
             try {
 
@@ -35,27 +35,40 @@ namespace Code_Louisville {
                 var computers = new List<Computer>();
                 //var buildingChoice = "";
 
-                // Creating DB File
-                Database.Create_DB_File();
+                // Prompting to choose a building
+                /*while (!buildingChoices.Contains(buildingChoice)) {
+                    Console.WriteLine("
+                    Test ");
 
+                }*/
+
+                //
+                //
                 // Getting List of Building
                 var buildingChoices = Building.Get_List_Of_Buildings();
 
+                // Creating DB Instance
+                var dataBase = new Database();
+
+                // Making Connection String
+                dataBase.DBConnection = new SQLiteConnection("Data Source=" + dataBase.FileName + ";Version=3;");
+
+                // Creating DB File
+                Database.Create_DB_File(dataBase);
+
                 // Open DB Connection
-                Database.Open_DB_Connection();
+                dataBase.DBConnection.Open();
 
                 // Creating Computers Table
-                Database.Create_DB_Table(sqlCreateTable);
+                Database.Create_DB_Table(dataBase, sqlCreateTable);
 
                 // Inserting Data to DB Table
-                Database.Insert_Data_To_Table(sqlCreateData);
+                Database.Insert_Data_To_Table(dataBase, sqlCreateData);
 
                 // Reading Data from DB
-                var reader = Database.Read_DB_Data(sqlSelectData);
+                var reader = Database.Read_DB_Data(dataBase, sqlSelectData);
 
-                // Closing DB Connection
-                Database.Close_DB_Connection();
-
+                // Adding data to computer list
                 while (reader.Read()) {
                     var theComputer = new Computer(
                         computer_Name: reader.GetString(0),
@@ -67,14 +80,8 @@ namespace Code_Louisville {
                     computers.Add(theComputer);
                 }
 
-                //
-
-                // Prompting to choose a building
-                /*while (!buildingChoices.Contains(buildingChoice)) {
-                    Console.WriteLine("
-                    Test ");
-
-                }*/
+                // Closing DB Connection
+                dataBase.DBConnection.Close();
 
                 var selectedComputers = Computer.SelectComputersFromBuilding(computers);
                 var headers = Computer.GetHeaders();
@@ -95,16 +102,11 @@ namespace Code_Louisville {
                     Console.WriteLine("No Results to display");
                 }
 
-                //Console.WriteLine(computers.Count);
-
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("error");
             }
-
-            //Console.WriteLine ("Press any key to finish.");
-            //Console.ReadLine ();
         }
     }
 }
