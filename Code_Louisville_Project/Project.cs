@@ -6,24 +6,9 @@ namespace Code_Louisville {
     class Project {
         static void Main() {
 
-            Console.Clear();
+            //Console.Clear();
 
             try {
-
-                // Creating DB File
-                Database.Create_DB_File();
-
-                // Getting List of Building
-                var buildingChoices = Building.Get_List_Of_Buildings();
-
-                var computers = new List<Computer>();
-                //var buildingChoice = "";
-
-                SQLiteConnection.CreateFile("Computer_Data.sqlite");
-                SQLiteConnection m_dbConnection;
-
-                m_dbConnection = new SQLiteConnection("Data Source=Computer_Data.sqlite;Version=3;");
-                m_dbConnection.Open();
 
                 string sqlCreateTable = @"
                         CREATE TABLE Computers (
@@ -33,29 +18,43 @@ namespace Code_Louisville {
                             Active BIT NOT NULL DEFAULT '0'
                         );
                     ";
-
-                var commandCreateTable = new SQLiteCommand(sqlCreateTable, m_dbConnection);
-
-                commandCreateTable.ExecuteNonQuery();
-
                 var sqlCreateData = @"
-                        INSERT INTO Computers
-                            (Computer_Name, Building, Physical_Machine, Active)
-                        VALUES
-                            ('Computer-013', 'BLDG1', FALSE, TRUE),
-                            ('Computer-014', 'BLDG1', FALSE, TRUE);
-                        ";
-                SQLiteCommand commandCreateData = new SQLiteCommand(sqlCreateData, m_dbConnection);
-
-                commandCreateData.ExecuteNonQuery();
-
+                    INSERT INTO Computers
+                        (Computer_Name, Building, Physical_Machine, Active)
+                    VALUES
+                        ('Computer-013', 'BLDG1', FALSE, TRUE),
+                        ('Computer-014', 'BLDG1', FALSE, TRUE);
+                    ";
                 var sqlSelectData = @"
-                        SELECT * FROM Computers;
-                        ";
+                    SELECT * FROM Computers;
+                    ";
 
-                SQLiteCommand commandSelectData = new SQLiteCommand(sqlSelectData, m_dbConnection);
+                //
+                // To do List
+                //
+                var computers = new List<Computer>();
+                //var buildingChoice = "";
 
-                var reader = commandSelectData.ExecuteReader();
+                // Creating DB File
+                Database.Create_DB_File();
+
+                // Getting List of Building
+                var buildingChoices = Building.Get_List_Of_Buildings();
+
+                // Open DB Connection
+                Database.Open_DB_Connection();
+
+                // Creating Computers Table
+                Database.Create_DB_Table(sqlCreateTable);
+
+                // Inserting Data to DB Table
+                Database.Insert_Data_To_Table(sqlCreateData);
+
+                // Reading Data from DB
+                var reader = Database.Read_DB_Data(sqlSelectData);
+
+                // Closing DB Connection
+                Database.Close_DB_Connection();
 
                 while (reader.Read()) {
                     var theComputer = new Computer(
@@ -67,8 +66,6 @@ namespace Code_Louisville {
 
                     computers.Add(theComputer);
                 }
-
-                m_dbConnection.Close();
 
                 //
 
