@@ -18,9 +18,28 @@ namespace Code_Louisville {
             Active = active;
         }
 
-        public List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput) {
+        public static List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput) {
 
-            return computerListInput;
+            var buildingSelection = Menu.DisplayMenu();
+
+            if (buildingSelection == "ALL") {
+                return computerListInput;
+            }
+            else {
+                var selectedComputers = computerListInput.FindAll(computer => computer.Building == buildingSelection);
+                return selectedComputers;
+            }
+        }
+
+        public static List<string> GetHeaders() {
+            var headers = new List<string> {
+                "Computer Name",
+                "Building",
+                "Physical Machine",
+                "Active"
+            };
+
+            return headers;
 
         }
     }
