@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-namespace Treehouse.CodeChallenges {
-    public static class MathHelpers {
-        public static List<int> GetPowersOf2(int UpperLimit) {
-            Console.WriteLine("What is the upper limit of the Powers of 2 list you request?");
+using System.Reflection;
 
-            var PowersOf2List = new List<int>();
+namespace ConsoleApplication1 {
 
-            for (int index = 0; index < UpperLimit + 1; index++) {
-                PowersOf2List.Add((int)Math.Pow(2, index));
-            }
-            return PowersOf2List;
+    class Program {
+        static void Main(string[] args) {
+            var DLL = Assembly.LoadFile(@"C:\BirdWatcher.dll");
+
+            Console.WriteLine(DLL.GetCustomAttributesData());
+
         }
     }
 }
