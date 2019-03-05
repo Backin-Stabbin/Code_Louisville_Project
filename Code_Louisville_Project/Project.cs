@@ -10,6 +10,8 @@ namespace Code_Louisville {
     class Project {
         static void Main() {
 
+            Console.Clear();
+
             try {
                 // List for Computers
                 var fileName = "Computer_Data.sqlite";
@@ -25,10 +27,6 @@ namespace Code_Louisville {
 
                 if (File.Exists(fileName)) {
                     File.Delete(fileName);
-                    Console.WriteLine("Deleting current DB File and recreating");
-                }
-                else {
-                    Console.WriteLine("File does not exist");
                 }
 
                 SQLiteConnection.CreateFile("Computer_Data.sqlite");
@@ -54,8 +52,8 @@ namespace Code_Louisville {
                         INSERT INTO Computers
                             (Computer_Name, Building, Physical_Machine, Active)
                         VALUES
-                            ('Computer-013', 'BLDG1', 'FALSE', 'TRUE'),
-                            ('Computer-014', 'BLDG1', 'FALSE', 'TRUE');
+                            ('Computer-013', 'BLDG1', FALSE, TRUE),
+                            ('Computer-014', 'BLDG1', FALSE, TRUE);
                         ";
                 SQLiteCommand commandCreateData = new SQLiteCommand(sqlCreateData, m_dbConnection);
 
@@ -73,8 +71,8 @@ namespace Code_Louisville {
                     var theComputer = new Computer(
                         computer_Name: reader.GetString(0),
                         building: reader.GetString(1),
-                        physical_Machine: reader.GetBoolean(2),
-                        active: reader.GetBoolean(3)
+                        physical_Machine: (bool) reader.GetValue(2),
+                        active: (bool) reader.GetValue(3)
                     );
 
                     computers.Add(theComputer);
@@ -82,7 +80,7 @@ namespace Code_Louisville {
 
                 m_dbConnection.Close();
 
-                //Menu.DisplayMenu();
+                //
 
                 // Prompting to choose a building
                 /*while (!buildingChoices.Contains(buildingChoice)) {
@@ -91,16 +89,23 @@ namespace Code_Louisville {
 
                 }*/
 
-                foreach (Computer computer in computers) {
-                    if (computer.Building == "BLDG1 ") {
-                        computer.Computer_Name = computer.Computer_Name.Replace("Computer ", "Machine ");
+                var selectedComputers = Computer.SelectComputersFromBuilding(computers);
+                var headers = Computer.GetHeaders();
 
-                        Console.WriteLine(
-                            " { 0, 20 } { 1, 8 } { 2, 6 } { 3, 6 }",
-                            computer.Computer_Name, computer.Building, computer.Physical_Machine, computer.Active
-                        );
+                if (selectedComputers.Count > 0) {
+                    Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
+                        headers[0].PadRight(20), headers[1].PadRight(10), headers[2], headers[3]));
+
+                    foreach (Computer computer in selectedComputers) {
+                        computer.Computer_Name = computer.Computer_Name.Replace("Computer", "Machine");
+
+                        Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
+                            computer.Computer_Name.PadRight(20), computer.Building.PadRight(10), computer.Physical_Machine, computer.Active
+                        ));
                     }
-
+                }
+                else {
+                    Console.WriteLine("No Results to display");
                 }
 
                 //Console.WriteLine(computers.Count);
