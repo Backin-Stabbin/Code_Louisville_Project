@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 using System.IO;
 
@@ -52,6 +55,21 @@ namespace Code_Louisville {
         public static SQLiteDataReader Read_DB_Data(Database database) {
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
             return command.ExecuteReader();
+        }
+
+        public static List<string> Read_DB_Table_Headers(Database database) {
+            List<string> table_Headers = new List<string>();
+            var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
+            var reader = command.ExecuteReader();
+            reader.Read();
+
+            var tableSchema = reader.GetSchemaTable();
+
+            // Each row in the table schema describes a column
+            foreach (DataRow row in tableSchema.Rows) {
+                table_Headers.Add(row["ColumnName"].ToString());
+            }
+            return table_Headers;
         }
     }
 }

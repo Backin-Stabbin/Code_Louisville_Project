@@ -6,6 +6,7 @@ namespace Code_Louisville {
     class Project {
         static void Main() {
 
+            // Clearing Console
             Console.Clear();
 
             try {
@@ -31,43 +32,27 @@ namespace Code_Louisville {
                 Database.Insert_Data_To_Table(dataBase);
 
                 // Reading Data from DB
-                var reader = Database.Read_DB_Data(dataBase);
+                var readerData = Database.Read_DB_Data(dataBase);
+
+                // Reading Table headers
+                //var readerHeaders = Database.Read_DB_Table_Headers(dataBase);
 
                 // Adding data to computer list
-                while (reader.Read()) {
-                    var theComputer = new Computer(
-                        computer_Name: reader.GetString(0),
-                        building: reader.GetString(1),
-                        physical_Machine: (bool) reader.GetValue(2),
-                        active: (bool) reader.GetValue(3)
-                    );
+                while (readerData.Read()) {
+                    var computer = new Computer();
+                    computer.Computer_Name = readerData.GetString(0);
+                    computer.Building = readerData.GetString(1);
+                    computer.Physical_Machine = readerData.GetBoolean(2);
+                    computer.Active = readerData.GetBoolean(3);
 
-                    computers.Add(theComputer);
+                    computers.Add(computer);
                 }
+
+                // Displaying computers
+                Computer.DisplayListOfComputers(computers, dataBase);
 
                 // Closing DB Connection
                 dataBase.DBConnection.Close();
-
-                var selectedComputers = Computer.SelectComputersFromBuilding(computers);
-                var headers = Computer.GetHeaders();
-
-                Console.Clear();
-
-                if (selectedComputers.Count > 0) {
-                    Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
-                        headers[0].PadRight(20), headers[1].PadRight(10), headers[2], headers[3]));
-
-                    foreach (Computer computer in selectedComputers) {
-                        computer.Computer_Name = computer.Computer_Name.Replace("Computer", "Machine");
-
-                        Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
-                            computer.Computer_Name.PadRight(20), computer.Building.PadRight(10), computer.Physical_Machine, computer.Active
-                        ));
-                    }
-                }
-                else {
-                    Console.WriteLine("No Results to display");
-                }
 
             }
             catch (Exception ex) {
