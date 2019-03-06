@@ -5,8 +5,9 @@ namespace Code_Louisville {
 
     public class Menu {
 
-        static public string DisplayBuildingMenu(List<string> buildingList) {
+        static public string DisplayBuildingMenu(List<Computer> computers) {
 
+            var buildingList = Building.Get_List_Of_Buildings(computers);
             string buildingName = "";
             int selectionError = 0;
 

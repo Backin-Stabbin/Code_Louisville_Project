@@ -10,22 +10,22 @@ namespace Code_Louisville {
         public bool Physical_Machine;
         public bool Active;
 
-        public static List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput, List<string> buildingList) {
+        public static List<Computer> SelectComputersFromBuilding(List<Computer> computers) {
 
-            var buildingSelection = Menu.DisplayBuildingMenu(buildingList);
+            var buildingSelection = Menu.DisplayBuildingMenu(computers);
 
             if (buildingSelection == "ALL") {
-                return computerListInput;
+                return computers;
             }
             else {
-                var selectedComputers = computerListInput.FindAll(computer => computer.Building == buildingSelection);
+                var selectedComputers = computers.FindAll(computer => computer.Building == buildingSelection);
                 return selectedComputers;
             }
         }
 
-        public static void DisplayListOfComputers(List<Computer> computers, Database database, List<string> buildingList) {
+        public static void DisplayListOfComputers(List<Computer> computers, Database database) {
 
-            var selectedComputers = SelectComputersFromBuilding(computers, buildingList);
+            var selectedComputers = SelectComputersFromBuilding(computers);
             var readerHeaders = Database.Read_DB_Table_Headers(database);
 
             Console.Clear();

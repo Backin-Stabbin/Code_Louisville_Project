@@ -50,7 +50,7 @@ namespace Code_Louisville {
                 var buildingList = Building.Get_List_Of_Buildings(computers);
 
                 // Displaying computers
-                Computer.DisplayListOfComputers(computers, dataBase, buildingList);
+                Computer.DisplayListOfComputers(computers, dataBase);
 
                 // Closing DB Connection
                 dataBase.DBConnection.Close();
