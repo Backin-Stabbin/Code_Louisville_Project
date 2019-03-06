@@ -17,6 +17,9 @@ namespace Code_Louisville {
                 // Creating DB Instance
                 var dataBase = new Database();
 
+                // Importing Computer List
+                var importedComputers = Computer.ImportComputers();
+
                 // Making Connection String
                 dataBase.DBConnection = new SQLiteConnection("Data Source=" + dataBase.FileName + ";Version=3;");
 
@@ -29,8 +32,8 @@ namespace Code_Louisville {
                 // Creating Computers Table
                 Database.Create_DB_Table(dataBase);
 
-                // Inserting Data to DB Table
-                Database.Insert_Data_To_Table(dataBase);
+                // Inserting Computers to DB Table
+                Database.Insert_Computers_To_Table(dataBase, importedComputers);
 
                 // Reading Data from DB
                 var readerData = Database.Read_DB_Data(dataBase);

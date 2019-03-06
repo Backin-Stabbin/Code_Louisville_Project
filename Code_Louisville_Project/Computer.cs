@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Code_Louisville {
 
@@ -9,6 +10,8 @@ namespace Code_Louisville {
         public string Building;
         public bool Physical_Machine;
         public bool Active;
+
+        public Computer computer { get; set; }
 
         public static List<Computer> SelectComputersFromBuilding(List<Computer> computers) {
 
@@ -44,6 +47,26 @@ namespace Code_Louisville {
             else {
                 Console.WriteLine("No Results to display");
             }
+        }
+
+        public static List<Computer> ImportComputers() {
+
+            var reader = new StreamReader(File.OpenRead("Sample_Computers.csv"));
+            var sampleComputers = new List<Computer>();
+            reader.ReadLine();
+
+            while (!reader.EndOfStream) {
+                var computer = new Computer();
+                var line = reader.ReadLine().Split(",");
+
+                computer.Computer_Name = line[0];
+                computer.Building = line[1];
+                computer.Physical_Machine = Convert.ToBoolean(line[2]);
+                computer.Active = Convert.ToBoolean(line[3]);
+
+                sampleComputers.Add(computer);
+            }
+            return sampleComputers;
         }
     }
 }
