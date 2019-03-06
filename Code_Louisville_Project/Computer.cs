@@ -1,19 +1,18 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Code_Louisville {
 
-    class Computer {
+    public class Computer {
 
         public string Computer_Name;
         public string Building;
         public bool Physical_Machine;
         public bool Active;
 
-        public static List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput) {
+        public static List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput, List<string> buildingList) {
 
-            var buildingSelection = Menu.DisplayBuildingMenu();
+            var buildingSelection = Menu.DisplayBuildingMenu(buildingList);
 
             if (buildingSelection == "ALL") {
                 return computerListInput;
@@ -24,9 +23,9 @@ namespace Code_Louisville {
             }
         }
 
-        public static void DisplayListOfComputers(List<Computer> computers, Database database) {
+        public static void DisplayListOfComputers(List<Computer> computers, Database database, List<string> buildingList) {
 
-            var selectedComputers = SelectComputersFromBuilding(computers);
+            var selectedComputers = SelectComputersFromBuilding(computers, buildingList);
             var readerHeaders = Database.Read_DB_Table_Headers(database);
 
             Console.Clear();

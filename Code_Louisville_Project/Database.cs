@@ -22,7 +22,7 @@ namespace Code_Louisville {
                 (Computer_Name, Building, Physical_Machine, Active)
             VALUES
                 ('Computer-013', 'BLDG1', FALSE, TRUE),
-                ('Computer-014', 'BLDG1', FALSE, TRUE)
+                ('Computer-014', 'BLDG2', FALSE, TRUE)
             ;
         ";
         public string SelectDataQuery = @"
