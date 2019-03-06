@@ -1,10 +1,11 @@
 using System;
+using System.Collections.Generic;
 
 namespace Code_Louisville {
 
     public class Menu {
 
-        static public string DisplayBuildingMenu() {
+        static public string DisplayBuildingMenu(List<string> buildingList) {
 
             string buildingName = "";
             int selectionError = 0;
@@ -21,17 +22,21 @@ namespace Code_Louisville {
                 Console.WriteLine("Would you like to work with one building or select all buildings?");
                 Console.WriteLine();
 
-                foreach (string building in Building.Get_List_Of_Buildings()) {
+                foreach (string building in buildingList) {
                     Console.WriteLine(building.Substring(building.Length - 1) + " - " + building.Replace("BLDG", "Building "));
                 }
 
                 Console.WriteLine("ALL - All Buildings");
                 Console.WriteLine();
-                Console.Write("Choose option [1-5] or [ALL] - ");
-
+                if (buildingList.Count > 1) {
+                    Console.Write("Choose option [1-" + buildingList.Count + "] or [ALL] - ");
+                }
+                else if (buildingList.Count == 1) {
+                    Console.Write("Choose option [1] or [ALL] - ");
+                }
                 var buildingSelection = Console.ReadLine().ToUpper();
 
-                foreach (string building in Building.Get_List_Of_Buildings()) {
+                foreach (string building in buildingList) {
                     if (buildingSelection == building.Substring(building.Length - 1)) {
                         buildingName = building;
                         return buildingName;

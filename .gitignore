@@ -10,7 +10,6 @@
 *.7z
 *.code-workspace
 tempCodeRunnerFile.cs
-*.sqlite
 
 
 ## Ignore Visual Studio temporary files, build results, and

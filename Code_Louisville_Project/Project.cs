@@ -35,9 +35,6 @@ namespace Code_Louisville {
                 // Reading Data from DB
                 var readerData = Database.Read_DB_Data(dataBase);
 
-                // Reading Table headers
-                //var readerHeaders = Database.Read_DB_Table_Headers(dataBase);
-
                 // Adding data to computer list
                 while (readerData.Read()) {
                     var computer = new Computer();
@@ -49,12 +46,14 @@ namespace Code_Louisville {
                     computers.Add(computer);
                 }
 
+                // Getting list of possible buildings
+                var buildingList = Building.Get_List_Of_Buildings(computers);
+
                 // Displaying computers
-                Computer.DisplayListOfComputers(computers, dataBase);
+                Computer.DisplayListOfComputers(computers, dataBase, buildingList);
 
                 // Closing DB Connection
                 dataBase.DBConnection.Close();
-
             }
             catch (Exception ex) {
                 Console.WriteLine(ex.Message);
