@@ -29,7 +29,7 @@ namespace Code_Louisville {
                 Console.WriteLine();
                 Console.Write("Choose option [1-5] or [ALL] - ");
 
-                var buildingSelection = Console.ReadLine();
+                var buildingSelection = Console.ReadLine().ToUpper();
 
                 foreach (string building in Building.Get_List_Of_Buildings()) {
                     if (buildingSelection == building.Substring(building.Length - 1)) {

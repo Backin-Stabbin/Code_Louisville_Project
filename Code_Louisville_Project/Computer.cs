@@ -11,13 +11,6 @@ namespace Code_Louisville {
         public bool Physical_Machine;
         public bool Active;
 
-        public Computer(string computer_Name, string building, bool physical_Machine, bool active) {
-            Computer_Name = computer_Name;
-            Building = building;
-            Physical_Machine = physical_Machine;
-            Active = active;
-        }
-
         public static List<Computer> SelectComputersFromBuilding(List<Computer> computerListInput) {
 
             var buildingSelection = Menu.DisplayBuildingMenu();
@@ -31,16 +24,27 @@ namespace Code_Louisville {
             }
         }
 
-        public static List<string> GetHeaders() {
-            var headers = new List<string> {
-                "Computer Name",
-                "Building",
-                "Physical Machine",
-                "Active"
-            };
+        public static void DisplayListOfComputers(List<Computer> computers, Database database) {
 
-            return headers;
+            var selectedComputers = SelectComputersFromBuilding(computers);
+            var readerHeaders = Database.Read_DB_Table_Headers(database);
 
+            Console.Clear();
+            if (selectedComputers.Count > 0) {
+                Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
+                    readerHeaders[0].PadRight(20), readerHeaders[1].PadRight(10), readerHeaders[2], readerHeaders[3]));
+
+                foreach (Computer computer in selectedComputers) {
+                    computer.Computer_Name = computer.Computer_Name.Replace("Computer", "Machine");
+
+                    Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
+                        computer.Computer_Name.PadRight(20), computer.Building.PadRight(10), computer.Physical_Machine, computer.Active
+                    ));
+                }
+            }
+            else {
+                Console.WriteLine("No Results to display");
+            }
         }
     }
 }
