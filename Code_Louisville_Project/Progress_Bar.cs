@@ -16,12 +16,15 @@ namespace Code_Louisville {
 
             // Empty Progress Bar
             Console.CursorLeft = 0;
-            Console.CursorTop = 3;
+            Console.CursorTop = 1;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write("|");
             Console.CursorLeft = Convert.ToInt32(progressChunk) + 1;
             Console.Write("|");
+            Console.ResetColor();
             Console.CursorLeft = 1;
             float onechunk = progressChunk / total;
+
             Console.ForegroundColor = ConsoleColor.Green;
 
             // Progress section
@@ -39,9 +42,13 @@ namespace Code_Louisville {
 
             // Progress count description
             Console.CursorLeft = Convert.ToInt32(progressChunk) + 4;
-            Console.Write((progress + 1).ToString() + " of " + total.ToString());
+            Console.ResetColor();
+            Console.Write((progress + 1).ToString());
+            Console.Write(" of ");
+            Console.Write(total.ToString());
+            Console.ResetColor();
             Console.Write(" ( ");
-            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.Write(((double) (progress + 1) / (double) total).ToString("P2"));
             Console.ResetColor();
             Console.Write(" ) ");
