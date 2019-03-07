@@ -35,18 +35,22 @@ namespace Code_Louisville {
                 // Inserting Computers to DB Table
                 Database.Insert_Computers_To_Table(dataBase, importedComputers);
 
-                // Reading Data from DB
-                var readerData = Database.Read_DB_Data(dataBase);
+                //Adding data to computer list
+                using(var readerData = Database.Read_DB_Data(dataBase)) {
+                    while (readerData.Read()) {
+                        var computer = new Computer();
+                        computer.Computer_Name = readerData.GetString(0);
+                        computer.Building = readerData.GetString(1);
+                        computer.Physical_Machine = readerData.GetBoolean(2);
+                        computer.Active = readerData.GetBoolean(3);
 
-                // Adding data to computer list
-                while (readerData.Read()) {
-                    var computer = new Computer();
-                    computer.Computer_Name = readerData.GetString(0);
-                    computer.Building = readerData.GetString(1);
-                    computer.Physical_Machine = readerData.GetBoolean(2);
-                    computer.Active = readerData.GetBoolean(3);
+                        computers.Add(computer);
+                    }
+                }
 
-                    computers.Add(computer);
+                // Grouping by building
+                using(SQLiteDataReader readerData2 = Database.Read_DB_Data(dataBase)) {
+                    Computer.ShowComputersByBuilding(readerData2);
                 }
 
                 // Getting list of possible buildings

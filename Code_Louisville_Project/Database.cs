@@ -44,28 +44,34 @@ namespace Code_Louisville {
         }
 
         public static void Insert_Computers_To_Table(Database database, List<Computer> computers) {
-            Console.WriteLine();
-            Console.WriteLine("Uploading computers to Database");
-            Console.WriteLine();
 
-            int progress = 0;
-            int total = computers.Count;
+            var insertCommandString = "INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active) VALUES ";
+            int counter = 0;
 
             foreach (Computer computer in computers) {
-                using(SQLiteCommand cmd = new SQLiteCommand(database.DBConnection)) {
-                    cmd.CommandText = "INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active)" +
-                        "VALUES ('" +
-                        computer.Computer_Name + "','" +
-                        computer.Building + "'," +
-                        computer.Physical_Machine + "," +
-                        computer.Active + ")" +
-                        ";";
-                    cmd.ExecuteNonQuery();
 
-                    ProgressBar.drawTextProgressBar(progress, total);
-                    progress = progress + 1;
+                counter = counter + 1;
+
+                insertCommandString = insertCommandString + "('" +
+                    computer.Computer_Name + "','" +
+                    computer.Building + "'," +
+                    computer.Physical_Machine + ",";
+
+                if (counter == computers.Count) {
+                    insertCommandString = insertCommandString + computer.Active + ")";
+                }
+                else {
+                    insertCommandString = insertCommandString + computer.Active + "),";
                 }
             }
+
+            insertCommandString = insertCommandString + ";";
+
+            using(SQLiteCommand sqlCommand = new SQLiteCommand(database.DBConnection)) {
+                sqlCommand.CommandText = insertCommandString;
+                sqlCommand.ExecuteNonQuery();
+            }
+
         }
 
         public static SQLiteDataReader Read_DB_Data(Database database) {

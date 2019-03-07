@@ -12,7 +12,6 @@ namespace Code_Louisville {
             int selectionError = 0;
 
             while (buildingName == "") {
-                Console.Clear();
 
                 if (selectionError != 0) {
                     Console.WriteLine();
@@ -20,8 +19,9 @@ namespace Code_Louisville {
                     Console.WriteLine();
                 }
 
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("Would you like to work with one building or select all buildings?");
-                Console.WriteLine();
+                Console.ResetColor();
 
                 foreach (string building in buildingList) {
                     Console.WriteLine(building.Substring(building.Length - 1) + " - " + building.Replace("BLDG", "Building "));
