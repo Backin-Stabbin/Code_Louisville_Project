@@ -45,7 +45,7 @@ namespace Code_Louisville {
                         computer.Computer_Name.PadRight(20), computer.Building.PadRight(10), computer.Physical_Machine, computer.Active
                     ));
                 }
-                Console.WriteLine("Total Computer Diplayed: " + selectedComputers.Count);
+                Console.WriteLine("Total Computers Diplayed: " + selectedComputers.Count);
             }
             else {
                 Console.WriteLine("No Results to display");
