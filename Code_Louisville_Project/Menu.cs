@@ -5,9 +5,9 @@ namespace Final_Project {
 
     public class Menu {
 
-        static public string DisplayBuildingMenu(List<Computer> computers) {
+        static public string DisplayBuildingMenu(List<Computer> ComputerList) {
 
-            var buildingList = Building.Get_List_Of_Buildings(computers);
+            var buildingList = Building.GetListOfBuildings(ComputerList);
             string buildingName = "";
             int selectionError = 0;
 

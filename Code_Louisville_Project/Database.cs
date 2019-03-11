@@ -89,8 +89,6 @@ namespace Final_Project {
 
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
             var reader = command.ExecuteReader();
-            //reader.Read();
-
             var tableSchema = reader.GetSchemaTable();
 
             foreach (DataRow row in tableSchema.Rows) {
