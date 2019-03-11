@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Code_Louisville {
+namespace Final_Project {
 
     public class Menu {
 
@@ -14,26 +14,31 @@ namespace Code_Louisville {
             while (buildingName == "") {
 
                 if (selectionError != 0) {
+                    Console.Clear();
                     Console.WriteLine();
                     Console.WriteLine("Incorrect selection, please try again...");
                     Console.WriteLine();
                 }
 
-                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("Would you like to work with one building or select all buildings?");
                 Console.ResetColor();
 
                 foreach (string building in buildingList) {
-                    Console.WriteLine(building.Substring(building.Length - 1) + " - " + building.Replace("BLDG", "Building "));
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write(" " + building.Substring(building.Length - 1));
+                    Console.ResetColor();
+                    Console.WriteLine(" - " + building.Replace("BLDG", "Building "));
                 }
 
-                Console.WriteLine("ALL - All Buildings");
+                Console.WriteLine(" ALL - All Buildings");
                 Console.WriteLine();
                 if (buildingList.Count > 1) {
                     Console.Write("Choose option [1-" + buildingList.Count + "] or [ALL] - ");
                 }
                 else if (buildingList.Count == 1) {
                     Console.Write("Choose option [1] or [ALL] - ");
+
                 }
                 var buildingSelection = Console.ReadLine().ToUpper();
 
@@ -53,6 +58,7 @@ namespace Code_Louisville {
                     buildingName = "";
                 }
             }
+
             return buildingName;
         }
     }

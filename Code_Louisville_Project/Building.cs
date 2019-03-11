@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Code_Louisville {
+namespace Final_Project {
 
     public class Building {
 

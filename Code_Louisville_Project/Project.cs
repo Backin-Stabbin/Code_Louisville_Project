@@ -2,69 +2,81 @@
 using System.Collections.Generic;
 using System.Data.SQLite;
 
-namespace Code_Louisville {
+namespace Final_Project {
 
     class Project {
+
         static void Main() {
 
-            // Clearing Console
+            Console.Title = "Code Louisville C# / .NET Project";
+
+            ConsoleView.ResetColor();
             Console.Clear();
 
             try {
                 // Used for list of Computers
-                var computers = new List<Computer>();
+                var computerList = new List<Computer>();
 
                 // Creating DB Instance
-                var dataBase = new Database();
+                var database = new Database();
 
                 // Importing Computer List
-                var importedComputers = Computer.ImportComputers();
+                var importedComputers = Computer.ImportComputersFromCSV("Sample_Computers.csv");
 
                 // Making Connection String
-                dataBase.DBConnection = new SQLiteConnection("Data Source=" + dataBase.FileName + ";Version=3;");
+                database.DBConnection = new SQLiteConnection("Data Source=" + database.FileName + ";Version=3;");
 
                 // Creating DB File
-                Database.Create_DB_File(dataBase);
+                Database.CreateDBFile(database);
 
                 // Open DB Connection
-                dataBase.DBConnection.Open();
+                database.DBConnection.Open();
 
                 // Creating Computers Table
-                Database.Create_DB_Table(dataBase);
+                Database.CreateComputersTable(database);
 
                 // Inserting Computers to DB Table
-                Database.Insert_Computers_To_Table(dataBase, importedComputers);
+                Database.AddComputersToDB(database, importedComputers);
 
                 //Adding data to computer list
-                using(var readerData = Database.Read_DB_Data(dataBase)) {
-                    while (readerData.Read()) {
+                using(var reader = Database.SelectComputersFromDB(database)) {
+                    while (reader.Read()) {
                         var computer = new Computer();
-                        computer.Computer_Name = readerData.GetString(0);
-                        computer.Building = readerData.GetString(1);
-                        computer.Physical_Machine = readerData.GetBoolean(2);
-                        computer.Active = readerData.GetBoolean(3);
+                        computer.Computer_Name = reader.GetString(0);
+                        computer.Building = reader.GetString(1);
+                        computer.Physical_Machine = reader.GetBoolean(2);
+                        computer.Active = reader.GetBoolean(3);
 
-                        computers.Add(computer);
+                        computerList.Add(computer);
                     }
                 }
 
                 // Grouping by building
-                using(SQLiteDataReader readerData2 = Database.Read_DB_Data(dataBase)) {
-                    Computer.ShowComputersByBuilding(readerData2);
+                using(var reader = Database.SelectComputersFromDB(database)) {
+                    Computer.ShowComputerCountPerBuilding(reader);
                 }
 
-                // Getting list of possible buildings
-                var buildingList = Building.Get_List_Of_Buildings(computers);
-
                 // Displaying computers
-                Computer.DisplayListOfComputers(computers, dataBase);
+                Computer.DisplayListOfComputers(computerList, database);
 
                 // Closing DB Connection
-                dataBase.DBConnection.Close();
+                database.DBConnection.Close();
+
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Press ANY Key to close window.");
+                Console.ReadKey();
             }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("error");
+            catch (Exception exception) {
+
+                Console.WriteLine();
+                Console.WriteLine(exception.Message);
+                Console.WriteLine();
+                Console.WriteLine(exception.StackTrace);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.ReadKey();
             }
         }
     }

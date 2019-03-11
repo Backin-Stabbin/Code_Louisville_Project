@@ -1,58 +1,50 @@
 using System;
 
-namespace Code_Louisville {
+namespace Final_Project {
+
     public class ProgressBar {
 
         public ProgressBar progressBar { get; set; }
-        public static void drawTextProgressBar(int progress, int total) {
 
-            int progressBarLength = total;
-            float progressChunk = progressBarLength - 1;
+        public static void ShowProgressBar(int currentProgress, int itemTotal) {
 
-            if (progressBarLength > 50) {
-                progressBarLength = 50;
-                progressChunk = progressBarLength - 1;
+            int barLength = itemTotal;
+            int position = 1;
+            float progressChunk = itemTotal - 1;
+
+            if (barLength > 50) {
+                barLength = 50;
+                progressChunk = barLength - 1;
             }
 
-            // Empty Progress Bar
+            float onechunk = progressChunk / itemTotal;
+
             Console.CursorLeft = 0;
             Console.CursorTop = 1;
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.Write("|");
+            ConsoleView.SetColors(ConsoleColor.Yellow);
+            Console.Write("-");
             Console.CursorLeft = Convert.ToInt32(progressChunk) + 1;
-            Console.Write("|");
-            Console.ResetColor();
-            Console.CursorLeft = 1;
-            float onechunk = progressChunk / total;
+            Console.Write("-");
 
-            Console.ForegroundColor = ConsoleColor.Green;
-
-            // Progress section
-            int position = 1;
-            for (int i = 0; i < onechunk * progress; i++) {
+            ConsoleView.SetColors(ConsoleColor.Green);
+            for (int i = 0; i < onechunk * currentProgress; i++) {
                 Console.CursorLeft = position++;
                 Console.Write("|");
             }
 
-            // No Progress section
             for (int i = position; i <= progressChunk; i++) {
                 Console.CursorLeft = position++;
                 Console.Write(" ");
             }
 
-            // Progress count description
             Console.CursorLeft = Convert.ToInt32(progressChunk) + 4;
-            Console.ResetColor();
-            Console.Write((progress + 1).ToString());
-            Console.Write(" of ");
-            Console.Write(total.ToString());
-            Console.ResetColor();
+            ConsoleView.ResetColor();
+            Console.Write((currentProgress + 1).ToString() + " of " + itemTotal.ToString());
             Console.Write(" ( ");
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.Write(((double) (progress + 1) / (double) total).ToString("P2"));
-            Console.ResetColor();
+            ConsoleView.SetColors(ConsoleColor.Yellow);
+            Console.Write(((double) (currentProgress + 1) / (double) itemTotal).ToString("P2"));
+            ConsoleView.ResetColor();
             Console.Write(" ) ");
-
         }
     }
 }
