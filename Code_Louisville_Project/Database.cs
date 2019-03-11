@@ -5,11 +5,12 @@ using System.Data.SQLite;
 using System.IO;
 using System.Threading;
 
-namespace Code_Louisville {
+namespace Final_Project {
 
     public class Database {
-        public string FileName = "Computer_Data.sqlite";
+
         public SQLiteConnection DBConnection;
+        public string FileName = "Computer_Data.sqlite";
 
         public string CreateTableQuery = @"
             CREATE TABLE Computers (
@@ -31,24 +32,26 @@ namespace Code_Louisville {
 
         public Database database { get; set; }
 
-        public static void Create_DB_File(Database database) {
+        public static void CreateDBFile(Database database) {
+
             if (File.Exists(database.FileName)) {
                 File.Delete(database.FileName);
             }
             SQLiteConnection.CreateFile(database.FileName);
         }
 
-        public static void Create_DB_Table(Database database) {
+        public static void CreateComputersTable(Database database) {
+
             var command = new SQLiteCommand(database.CreateTableQuery, database.DBConnection);
             command.ExecuteNonQuery();
         }
 
-        public static void Insert_Computers_To_Table(Database database, List<Computer> computers) {
+        public static void AddComputersToDB(Database database, List<Computer> computerList) {
 
-            var insertCommandString = "INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active) VALUES ";
+            string insertCommandString = "INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active) VALUES ";
             int counter = 0;
 
-            foreach (Computer computer in computers) {
+            foreach (Computer computer in computerList) {
 
                 counter = counter + 1;
 
@@ -57,7 +60,7 @@ namespace Code_Louisville {
                     computer.Building + "'," +
                     computer.Physical_Machine + ",";
 
-                if (counter == computers.Count) {
+                if (counter == computerList.Count) {
                     insertCommandString = insertCommandString + computer.Active + ")";
                 }
                 else {
@@ -67,32 +70,34 @@ namespace Code_Louisville {
 
             insertCommandString = insertCommandString + ";";
 
-            using(SQLiteCommand sqlCommand = new SQLiteCommand(database.DBConnection)) {
+            using(var sqlCommand = new SQLiteCommand(database.DBConnection)) {
+
                 sqlCommand.CommandText = insertCommandString;
                 sqlCommand.ExecuteNonQuery();
             }
-
         }
 
-        public static SQLiteDataReader Read_DB_Data(Database database) {
+        public static SQLiteDataReader SelectComputersFromDB(Database database) {
 
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
             return command.ExecuteReader();
         }
 
-        public static List<string> Read_DB_Table_Headers(Database database) {
-            List<string> table_Headers = new List<string>();
+        public static List<string> GetComputerTableHeaders(Database database) {
+
+            List<string> computerTableHeaders = new List<string>();
+
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
             var reader = command.ExecuteReader();
-            reader.Read();
+            //reader.Read();
 
             var tableSchema = reader.GetSchemaTable();
 
-            // Each row in the table schema describes a column
             foreach (DataRow row in tableSchema.Rows) {
-                table_Headers.Add(row["ColumnName"].ToString());
+                computerTableHeaders.Add(row["ColumnName"].ToString());
             }
-            return table_Headers;
+
+            return computerTableHeaders;
         }
     }
 }

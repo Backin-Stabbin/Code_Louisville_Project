@@ -1,13 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
-
   <ItemGroup>
-    <PackageReference Include="System.Data.SqlClient" Version="4.6.0" />
-    <PackageReference Include="System.Data.SQLite" Version="1.0.110" />
+    <Content Include="Sample_Computers.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="System.Data.SQLite" Version="1.0.110"/>
+    <PackageReference Include="System.Data.SQLite.Core" Version="*"/>
+  </ItemGroup>
 </Project>
