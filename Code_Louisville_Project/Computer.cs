@@ -61,6 +61,7 @@ namespace Final_Project {
 
         public static List<Computer> ImportComputersFromCSV(string fileName) {
 
+            Console.Clear();
             var importedComputers = new List<Computer>();
             int currentProgress = 0;
             int totalComputers = 0;

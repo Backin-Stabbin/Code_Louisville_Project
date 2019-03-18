@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
 using System.IO;
-using System.Threading;
 
 namespace Final_Project {
 
@@ -11,7 +10,6 @@ namespace Final_Project {
 
         public SQLiteConnection DBConnection;
         public string FileName = "Computer_Data.sqlite";
-
         public string CreateTableQuery = @"
             CREATE TABLE Computers (
                 Computer_Name VARCHAR(20) PRIMARY KEY NOT NULL,
@@ -29,21 +27,106 @@ namespace Final_Project {
             FROM
                 Computers;
         ";
+        public string CheckTableExist = @"
+            SELECT
+                Name
+            FROM
+                sqlite_master
+            WHERE
+                Name='Computers'
+            ";
 
         public Database database { get; set; }
 
         public static void CreateDBFile(Database database) {
 
+            Console.Write("Checking for Database File...");
+
             if (File.Exists(database.FileName)) {
-                File.Delete(database.FileName);
+                ConsoleView.SetColors(ConsoleColor.Green);
+                Console.WriteLine("Database Already Exist.");
+                ConsoleView.ResetColor();
             }
-            SQLiteConnection.CreateFile(database.FileName);
+            else {
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write(" Attempting to Create Database File...");
+                ConsoleView.ResetColor();
+
+                SQLiteConnection.CreateFile(database.FileName);
+
+                if (File.Exists(database.FileName)) {
+                    ConsoleView.SetColors(ConsoleColor.Green);
+                    Console.WriteLine(" Created");
+                    ConsoleView.ResetColor();
+                    SQLiteConnection.CreateFile(database.FileName);
+                }
+                else {
+                    ConsoleView.SetColors(ConsoleColor.Red);
+                    Console.WriteLine(" Error Creating Database File.");
+                    ConsoleView.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine("Press ANY Key to close.");
+                    Console.ReadKey();
+                    Environment.Exit(1);
+
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Database Exists.");
+            Console.WriteLine();
+            Console.WriteLine("Press ANY Key to continue.");
+            Console.ReadKey();
+        }
+
+        public static void DeleteDBFile(Database database) {
+
+            Console.Write("Checking for Database File...");
+            bool? doesExist = null;
+
+            if (File.Exists(database.FileName)) {
+                doesExist = true;
+
+                ConsoleView.SetColors(ConsoleColor.Green);
+                Console.WriteLine(" Database File Exist...");
+                ConsoleView.ResetColor();
+            }
+            else {
+                doesExist = false;
+
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write(" No Database File to delete.");
+                ConsoleView.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("Press ANY Key to close.");
+            }
+
+            if (doesExist == true) {
+
+                File.Delete(database.FileName);
+
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine(" Datebase File Deleted.");
+                ConsoleView.ResetColor();
+                Console.WriteLine();
+                Console.WriteLine("Press ANY Key to close.");
+            }
+
+            Console.ReadKey();
+            Environment.Exit(1);
+
         }
 
         public static void CreateComputersTable(Database database) {
 
-            var command = new SQLiteCommand(database.CreateTableQuery, database.DBConnection);
-            command.ExecuteNonQuery();
+            var command = new SQLiteCommand(database.CheckTableExist, database.DBConnection);
+            var tableName = command.ExecuteScalar();
+
+            if (tableName == null) {
+                command.CommandText = database.CreateTableQuery;
+                command.ExecuteNonQuery();
+            }
+
         }
 
         public static void AddComputersToDB(Database database, List<Computer> computerList) {
@@ -178,7 +261,8 @@ namespace Final_Project {
                 }
             }
 
-            string query = @"INSERT INTO Computers(Computer_Name, Building, Physical_Machine, Active) VALUES ('" +
+            string query = @"
+                INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active) VALUES ('" +
                 computerName + "','" + buildingName + "'," + physicalMachine + "," + activeStatus + ");";
 
             using(var sqlCommand = new SQLiteCommand(query, database.DBConnection)) {
