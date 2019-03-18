@@ -10,7 +10,7 @@
             "args": [],
             "cwd": "${workspaceFolder}/Code_Louisville_Project",
             "stopAtEntry": false,
-            "console": "internalConsole"
+            "console": "integratedTerminal"
         },
         {
             "name": "Practice",

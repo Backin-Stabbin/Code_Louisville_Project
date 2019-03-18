@@ -51,7 +51,12 @@ namespace Final_Project {
             string insertCommandString = "INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active) VALUES ";
             int counter = 0;
 
+            string oldComputerName = computerList[1].Computer_Name.ToUpper();
+            string newComputerName = Computer.ChangeComputerName(oldComputerName);
+
             foreach (Computer computer in computerList) {
+
+                computer.Computer_Name = computer.Computer_Name.Replace(oldComputerName.Split("-") [0].ToUpper(), newComputerName);
 
                 counter = counter + 1;
 
@@ -89,8 +94,6 @@ namespace Final_Project {
 
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
             var reader = command.ExecuteReader();
-            //reader.Read();
-
             var tableSchema = reader.GetSchemaTable();
 
             foreach (DataRow row in tableSchema.Rows) {
@@ -98,6 +101,98 @@ namespace Final_Project {
             }
 
             return computerTableHeaders;
+        }
+
+        public static void AddDBRecord(Database database) {
+            Console.Clear();
+
+            string computerName = "";
+            string buildingName = "";
+            bool? physicalMachine = null;
+            bool? activeStatus = null;
+            string boolString = "";
+            int buildingNumber = 0;
+
+            while (computerName == "" || computerName.Length < 4 || computerName.Substring(0, 1) == "-" ||
+                computerName.Substring(computerName.Length - 1, 1) == "-" || computerName.IndexOf("-") < 0
+            ) {
+                Console.Clear();
+                Console.WriteLine();
+                Console.Write("Enter Computer Name (Must have a hyphen): ");
+                computerName = Console.ReadLine().ToUpper();
+            }
+
+            while (buildingName == "") {
+                Console.Clear();
+                Console.WriteLine();
+                Console.Write("Enter Building NUmber [1-9]: ");
+                buildingName = Console.ReadLine();
+                try {
+                    buildingNumber = Convert.ToInt16(buildingName);
+                    if (buildingNumber >= 1 && buildingNumber <= 9) {
+                        buildingName = "BLDG" + buildingNumber;
+                    }
+                    else {
+                        buildingName = "";
+                    }
+                }
+                catch {
+                    buildingName = "";
+                }
+
+            }
+            while (boolString != "Y" && boolString != "N") {
+                Console.Clear();
+                Console.WriteLine();
+                Console.Write("Is this computer a physical machine. [Y] or [N]? ");
+                boolString = Console.ReadLine().ToUpper();
+
+                if (boolString == "Y") {
+                    physicalMachine = true;
+                }
+                else if (boolString == "N") {
+                    physicalMachine = false;
+                }
+                else {
+                    physicalMachine = null;
+                }
+
+            }
+
+            boolString = "";
+
+            while (boolString != "Y" && boolString != "N") {
+                Console.Clear();
+                Console.WriteLine();
+                Console.Write("Is this computer an active machine. [Y] or [N]? ");
+                boolString = Console.ReadLine().ToUpper();
+
+                if (boolString == "Y") {
+                    activeStatus = true;
+                }
+                else if (boolString == "N") {
+                    activeStatus = false;
+                }
+                else {
+                    activeStatus = null;
+                }
+            }
+
+            string query = @"INSERT INTO Computers(Computer_Name, Building, Physical_Machine, Active) VALUES ('" +
+                computerName + "','" + buildingName + "'," + physicalMachine + "," + activeStatus + ");";
+
+            using(var sqlCommand = new SQLiteCommand(query, database.DBConnection)) {
+
+                sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public static void UupdateDBRecord(Database database) {
+
+        }
+
+        public static void DeleteDBRecord(Database database) {
+
         }
     }
 }

@@ -5,10 +5,10 @@ namespace Final_Project {
 
     public class Building {
 
-        public static List<string> Get_List_Of_Buildings(List<Computer> computers) {
+        public static List<string> GetListOfBuildings(List<Computer> computerList) {
             var buildingList = new List<string>();
 
-            var uniqueBuildings = computers.GroupBy(computer => computer.Building).ToList();
+            var uniqueBuildings = computerList.GroupBy(computer => computer.Building).ToList();
             uniqueBuildings.ForEach(building => { buildingList.Add(building.Key); });
 
             return buildingList;

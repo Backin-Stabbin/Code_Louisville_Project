@@ -5,9 +5,9 @@ namespace Final_Project {
 
     public class Menu {
 
-        static public string DisplayBuildingMenu(List<Computer> computers) {
+        static public string DisplayBuildingMenu(List<Computer> ComputerList) {
 
-            var buildingList = Building.Get_List_Of_Buildings(computers);
+            var buildingList = Building.GetListOfBuildings(ComputerList);
             string buildingName = "";
             int selectionError = 0;
 
@@ -31,7 +31,9 @@ namespace Final_Project {
                     Console.WriteLine(" - " + building.Replace("BLDG", "Building "));
                 }
 
+                ConsoleView.SetColors(ConsoleColor.Yellow);
                 Console.WriteLine(" ALL - All Buildings");
+                ConsoleView.ResetColor();
                 Console.WriteLine();
                 if (buildingList.Count > 1) {
                     Console.Write("Choose option [1-" + buildingList.Count + "] or [ALL] - ");
@@ -60,6 +62,52 @@ namespace Final_Project {
             }
 
             return buildingName;
+        }
+
+        public static int UserChoice() {
+            int choice = 99;
+
+            while (choice == 99 || choice == 0) {
+
+                if (choice == 0) {
+                    Console.Clear();
+                    Console.WriteLine();
+                    Console.WriteLine("Incorrect selection. Try again");
+
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("1 - Add a new computer");
+                Console.WriteLine("2 - Update existing computer");
+                Console.WriteLine("3 - Delete a computer");
+                Console.WriteLine("4 - Nothing");
+                Console.WriteLine();
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("What would you like to do? ");
+                ConsoleView.ResetColor();
+
+                string stringChoice = Console.ReadLine();
+
+                if (stringChoice == "1") {
+                    return choice = 1;
+                }
+                else if (stringChoice == "2") {
+                    return choice = 2;
+                }
+                else if (stringChoice == "3") {
+                    return choice = 3;
+                }
+                else if (stringChoice == "4") {
+                    return choice = 4;
+                }
+                else {
+                    choice = 0;
+                }
+
+            }
+
+            return choice;
+
         }
     }
 }
