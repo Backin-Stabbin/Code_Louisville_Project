@@ -64,7 +64,9 @@ namespace Final_Project {
             return buildingName;
         }
 
-        public static int UserChoice() {
+        public static int MainMenu() {
+
+            Console.Clear();
             int choice = 99;
 
             while (choice == 99 || choice == 0) {
@@ -72,15 +74,19 @@ namespace Final_Project {
                 if (choice == 0) {
                     Console.Clear();
                     Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
                     Console.WriteLine("Incorrect selection. Try again");
-
+                    ConsoleView.ResetColor();
                 }
 
                 Console.WriteLine();
-                Console.WriteLine("1 - Add a new computer");
-                Console.WriteLine("2 - Update existing computer");
-                Console.WriteLine("3 - Delete a computer");
-                Console.WriteLine("4 - Nothing");
+                Console.WriteLine("1 - Import Computers from Sample CSV to DB (Currently does not check for Duplicates)");
+                Console.WriteLine("2 - View Computers in DB");
+                Console.WriteLine("3 - Add a new computer to DB (Currently does not check for Duplicates)");
+                Console.WriteLine("4 - Update existing computer in DB (Not Implemented Yet)");
+                Console.WriteLine("5 - Delete a computer from DB (Not Implemented Yet)");
+                Console.WriteLine("6 - Delete Database File (Not working yet)");
+                Console.WriteLine("7 - Nothing (Exits Program)");
                 Console.WriteLine();
                 ConsoleView.SetColors(ConsoleColor.Yellow);
                 Console.Write("What would you like to do? ");
@@ -100,6 +106,15 @@ namespace Final_Project {
                 else if (stringChoice == "4") {
                     return choice = 4;
                 }
+                else if (stringChoice == "5") {
+                    return choice = 5;
+                }
+                else if (stringChoice == "6") {
+                    return choice = 6;
+                }
+                else if (stringChoice == "7") {
+                    return choice = 7;
+                }
                 else {
                     choice = 0;
                 }
@@ -109,5 +124,6 @@ namespace Final_Project {
             return choice;
 
         }
+
     }
 }
