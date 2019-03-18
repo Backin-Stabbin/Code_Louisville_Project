@@ -41,7 +41,6 @@ namespace Final_Project {
                 ConsoleView.ResetColor();
 
                 foreach (Computer computer in selectedComputers) {
-                    computer.Computer_Name = computer.Computer_Name.Replace("Computer".ToUpper(), "Machine").ToUpper();
 
                     Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
                         computer.Computer_Name.PadRight(20), computer.Building.PadRight(10), computer.Physical_Machine, computer.Active
@@ -105,6 +104,7 @@ namespace Final_Project {
         public static void ShowComputerCountPerBuilding(SQLiteDataReader reader) {
 
             var computers = new List<Computer>();
+            Console.Clear();
 
             ConsoleView.SetColors(ConsoleColor.Yellow);
             Console.WriteLine("Computers per Building");
@@ -135,6 +135,26 @@ namespace Final_Project {
             Console.WriteLine(computers.Count);
             Console.WriteLine();
             Console.WriteLine();
+        }
+
+        public static string ChangeComputerName(string oldComputerName) {
+
+            string newComputerName = "";
+            Console.WriteLine();
+            Console.WriteLine("Please choose a new name for your computers.");
+            Console.Write("Currently your computers are named like - ");
+            ConsoleView.SetColors(ConsoleColor.Yellow);
+            Console.WriteLine(oldComputerName);
+            ConsoleView.ResetColor();
+            Console.WriteLine();
+            Console.Write("Enter new name to replace ");
+            ConsoleView.SetColors(ConsoleColor.Yellow);
+            Console.Write(oldComputerName.Split("-") [0]);
+            ConsoleView.ResetColor();
+            Console.Write(": ");
+            newComputerName = Console.ReadLine();
+
+            return newComputerName;
         }
     }
 }

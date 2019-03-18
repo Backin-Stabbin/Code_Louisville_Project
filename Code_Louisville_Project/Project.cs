@@ -58,8 +58,26 @@ namespace Final_Project {
 
                 // Displaying computers
                 Computer.DisplayListOfComputers(computerList, database);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("Press ANY Key to continue.");
+                Console.ReadKey();
+                Console.Clear();
+
+                //Option to add, update, or remove from DB
+                var Choice = Menu.UserChoice();
 
                 // Closing DB Connection
+                if (Choice == 1) {
+                    Database.AddDBRecord(database);
+                }
+                if (Choice == 2) {
+                    Database.UupdateDBRecord(database);
+                }
+                if (Choice == 3) {
+                    Database.DeleteDBRecord(database);
+                }
+
                 database.DBConnection.Close();
 
                 Console.WriteLine();
