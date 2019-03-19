@@ -167,7 +167,7 @@ namespace Final_Project {
                     return choice = 7;
                 }
                 else if (stringChoice == "8") {
-                    return choice = 7;
+                    return choice = 8;
                 }
                 else {
                     choice = 0;

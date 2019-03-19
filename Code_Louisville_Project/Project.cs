@@ -90,7 +90,6 @@ namespace Final_Project {
                         Database.DeleteDBFile(database);
                     }
                     else if (choice == 8) {
-                        database.DBConnection.Close();
                         Environment.Exit(1);
                     }
 
