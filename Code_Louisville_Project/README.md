@@ -1,7 +1,8 @@
 
+This is my Code Louisville C# Final Project
 
-This is Code Louisville C# Final Project.
+Requirements:
+- SQlite must be installed for it to operate.
 
-SQlite must be installed for it to operate.
-
-There are known conflicts with file locking when cycling back to main menu. Closing and reopening program will bypass that issue for testing
+Known Conflicts:
+- Unable to delete Database after selecting data from it without relaunching/restarting program
