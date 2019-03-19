@@ -128,49 +128,49 @@ namespace Final_Project {
 
             database.DBConnection.Open();
 
-            var command = new SQLiteCommand(database.CheckTableExist, database.DBConnection);
-            var tableName = command.ExecuteScalar();
+            using(var command = new SQLiteCommand(database.CheckTableExist, database.DBConnection)) {
+                var tableName = command.ExecuteScalar();
 
-            Console.WriteLine();
-            Console.Write("Checking to see if Computers Table exist...");
-
-            if (tableName == null) {
-                ConsoleView.SetColors(ConsoleColor.Yellow);
-                Console.WriteLine("Missing DB Table");
-                ConsoleView.ResetColor();
                 Console.WriteLine();
-                Console.Write("Attempting to Create Computers Table...");
-
-                command.CommandText = database.CreateTableQuery;
-                command.ExecuteNonQuery();
-
-                command = new SQLiteCommand(database.CheckTableExist, database.DBConnection);
-                tableName = command.ExecuteScalar();
+                Console.Write("Checking to see if Computers Table exist...");
 
                 if (tableName == null) {
-                    ConsoleView.SetColors(ConsoleColor.Red);
-                    Console.WriteLine(" Error Creating Computers Table.");
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    Console.WriteLine("Missing DB Table");
                     ConsoleView.ResetColor();
                     Console.WriteLine();
-                    Console.WriteLine("Press ANY Key to close.");
-                    Console.ReadKey();
-                    Environment.Exit(1);
+                    Console.Write("Attempting to Create Computers Table...");
+
+                    command.CommandText = database.CreateTableQuery;
+                    command.ExecuteNonQuery();
+
+                    using(var command2 = new SQLiteCommand(database.CheckTableExist, database.DBConnection)) {
+                        tableName = command2.ExecuteScalar();
+
+                        if (tableName == null) {
+                            ConsoleView.SetColors(ConsoleColor.Red);
+                            Console.WriteLine(" Error Creating Computers Table.");
+                            ConsoleView.ResetColor();
+                            Console.WriteLine();
+                            Console.WriteLine("Press ANY Key to close.");
+                            Console.ReadKey();
+                            Environment.Exit(1);
+                        }
+                        else {
+                            ConsoleView.SetColors(ConsoleColor.Green);
+                            Console.WriteLine(" Created.");
+                            ConsoleView.ResetColor();
+                        }
+                    }
                 }
                 else {
                     ConsoleView.SetColors(ConsoleColor.Green);
-                    Console.WriteLine(" Created.");
+                    Console.WriteLine(" Computers Table Already Exist");
                     ConsoleView.ResetColor();
-
                 }
-            }
-            else {
-                ConsoleView.SetColors(ConsoleColor.Green);
-                Console.WriteLine(" Computers Table Already Exist");
-                ConsoleView.ResetColor();
             }
 
             database.DBConnection.Close();
-
         }
 
         public static void AddComputersToDB(Database database, List<Computer> computerList) {

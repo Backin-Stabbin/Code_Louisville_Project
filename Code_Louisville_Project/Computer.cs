@@ -101,6 +101,8 @@ namespace Final_Project {
             Console.WriteLine();
             Console.WriteLine("Identification complete");
             Console.WriteLine();
+
+            database.DBConnection.Close();
             return importedComputers;
         }
 
