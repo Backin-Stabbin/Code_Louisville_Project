@@ -139,7 +139,7 @@ namespace Final_Project {
 
                 Console.WriteLine();
                 ConsoleView.SetColors(ConsoleColor.Cyan);
-                Console.WriteLine("Warning - Importing or Adding Computers does not check for Dupelicates");
+                Console.WriteLine("Warning - Importing or Adding Computers does not check for Duplicates");
                 ConsoleView.ResetColor();
 
                 Console.WriteLine();
