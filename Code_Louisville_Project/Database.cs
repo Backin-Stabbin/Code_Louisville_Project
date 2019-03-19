@@ -40,25 +40,29 @@ namespace Final_Project {
 
         public static void CreateDBFile(Database database) {
 
+            Console.Clear();
+            Console.WriteLine();
             Console.Write("Checking for Database File...");
 
             if (File.Exists(database.FileName)) {
                 ConsoleView.SetColors(ConsoleColor.Green);
-                Console.WriteLine("Database Already Exist.");
+                Console.WriteLine(" Database Already Exist.");
                 ConsoleView.ResetColor();
             }
             else {
                 ConsoleView.SetColors(ConsoleColor.Yellow);
-                Console.Write(" Attempting to Create Database File...");
+                Console.WriteLine(" Database File Missing");
                 ConsoleView.ResetColor();
+                Console.WriteLine();
+                Console.Write("Attempting to Create Database File...");
 
                 SQLiteConnection.CreateFile(database.FileName);
 
                 if (File.Exists(database.FileName)) {
                     ConsoleView.SetColors(ConsoleColor.Green);
+                    SQLiteConnection.CreateFile(database.FileName);
                     Console.WriteLine(" Created");
                     ConsoleView.ResetColor();
-                    SQLiteConnection.CreateFile(database.FileName);
                 }
                 else {
                     ConsoleView.SetColors(ConsoleColor.Red);
@@ -71,16 +75,26 @@ namespace Final_Project {
 
                 }
             }
+        }
 
-            Console.WriteLine();
-            Console.WriteLine("Database Exists.");
-            Console.WriteLine();
-            Console.WriteLine("Press ANY Key to continue.");
-            Console.ReadKey();
+        public static string CheckDBExist(Database database) {
+
+            string databaseCheck = "";
+
+            if (File.Exists(database.FileName)) {
+                databaseCheck = "Exist";
+                return databaseCheck;
+            }
+            else {
+                databaseCheck = "Missing";
+                return databaseCheck;
+            }
         }
 
         public static void DeleteDBFile(Database database) {
 
+            Console.Clear();
+            Console.WriteLine();
             Console.Write("Checking for Database File...");
             bool? doesExist = null;
 
@@ -88,44 +102,74 @@ namespace Final_Project {
                 doesExist = true;
 
                 ConsoleView.SetColors(ConsoleColor.Green);
-                Console.WriteLine(" Database File Exist...");
+                Console.WriteLine(" Database File Exist");
                 ConsoleView.ResetColor();
             }
             else {
                 doesExist = false;
 
                 ConsoleView.SetColors(ConsoleColor.Yellow);
-                Console.Write(" No Database File to delete.");
+                Console.WriteLine(" No Database File to delete");
                 ConsoleView.ResetColor();
-                Console.WriteLine();
-                Console.WriteLine("Press ANY Key to close.");
             }
 
             if (doesExist == true) {
 
                 File.Delete(database.FileName);
 
-                ConsoleView.SetColors(ConsoleColor.Yellow);
-                Console.WriteLine(" Datebase File Deleted.");
-                ConsoleView.ResetColor();
                 Console.WriteLine();
-                Console.WriteLine("Press ANY Key to close.");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine("Datebase File Deleted");
+                ConsoleView.ResetColor();
             }
-
-            Console.ReadKey();
-            Environment.Exit(1);
-
         }
 
         public static void CreateComputersTable(Database database) {
 
+            database.DBConnection.Open();
+
             var command = new SQLiteCommand(database.CheckTableExist, database.DBConnection);
             var tableName = command.ExecuteScalar();
 
+            Console.WriteLine();
+            Console.Write("Checking to see if Computers Table exist...");
+
             if (tableName == null) {
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine("Missing DB Table");
+                ConsoleView.ResetColor();
+                Console.WriteLine();
+                Console.Write("Attempting to Create Computers Table...");
+
                 command.CommandText = database.CreateTableQuery;
                 command.ExecuteNonQuery();
+
+                command = new SQLiteCommand(database.CheckTableExist, database.DBConnection);
+                tableName = command.ExecuteScalar();
+
+                if (tableName == null) {
+                    ConsoleView.SetColors(ConsoleColor.Red);
+                    Console.WriteLine(" Error Creating Computers Table.");
+                    ConsoleView.ResetColor();
+                    Console.WriteLine();
+                    Console.WriteLine("Press ANY Key to close.");
+                    Console.ReadKey();
+                    Environment.Exit(1);
+                }
+                else {
+                    ConsoleView.SetColors(ConsoleColor.Green);
+                    Console.WriteLine(" Created.");
+                    ConsoleView.ResetColor();
+
+                }
             }
+            else {
+                ConsoleView.SetColors(ConsoleColor.Green);
+                Console.WriteLine(" Computers Table Already Exist");
+                ConsoleView.ResetColor();
+            }
+
+            database.DBConnection.Close();
 
         }
 
@@ -159,10 +203,14 @@ namespace Final_Project {
             insertCommandString = insertCommandString + ";";
 
             using(var sqlCommand = new SQLiteCommand(database.DBConnection)) {
+                database.DBConnection.Open();
 
                 sqlCommand.CommandText = insertCommandString;
                 sqlCommand.ExecuteNonQuery();
+
+                database.DBConnection.Close();
             }
+
         }
 
         public static SQLiteDataReader SelectComputersFromDB(Database database) {
@@ -187,6 +235,8 @@ namespace Final_Project {
         }
 
         public static void AddDBRecord(Database database) {
+
+            database.DBConnection.Open();
             Console.Clear();
 
             string computerName = "";
@@ -269,6 +319,8 @@ namespace Final_Project {
 
                 sqlCommand.ExecuteNonQuery();
             }
+
+            database.DBConnection.Close();
         }
 
         public static void UupdateDBRecord(Database database) {

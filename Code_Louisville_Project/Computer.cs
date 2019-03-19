@@ -59,7 +59,9 @@ namespace Final_Project {
             }
         }
 
-        public static List<Computer> ImportComputersFromCSV(string fileName) {
+        public static List<Computer> ImportComputersFromCSV(string fileName, Database database) {
+
+            database.DBConnection.Open();
 
             Console.Clear();
             var importedComputers = new List<Computer>();
@@ -126,7 +128,7 @@ namespace Final_Project {
             var uniqueBuildings = computers.GroupBy(computer => computer.Building).ToList();
 
             foreach (var building in uniqueBuildings) {
-                Console.Write(building.Key + " - ");
+                Console.Write(" " + building.Key + " - ");
                 Console.WriteLine(computers.Where(computer => computer.Building == building.Key).Count());
             }
 

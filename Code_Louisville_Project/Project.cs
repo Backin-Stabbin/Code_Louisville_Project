@@ -20,77 +20,84 @@ namespace Final_Project {
                 var database = new Database();
                 // Making Connection String
                 database.DBConnection = new SQLiteConnection("Data Source=" + database.FileName + ";Version=3;");
-                // Creating DB File
-                Database.CreateDBFile(database);
-                // Open DB Connection
-                database.DBConnection.Open();
-                // Creating Computers Table
-                Database.CreateComputersTable(database);
+
+                int choice = 0;
 
                 // Main Menu
-                var Choice = Menu.MainMenu();
+                while (choice != 8) {
+                    choice = Menu.MainMenu(database);
 
-                if (Choice == 1) {
+                    if (choice == 1) {
 
-                    // Importing Computer List
-                    var importedComputers = Computer.ImportComputersFromCSV("Sample_Computers.csv");
+                        // Importing Computer List
+                        var importedComputers = Computer.ImportComputersFromCSV("Sample_Computers.csv", database);
 
-                    // Inserting Computers to DB Table
-                    Database.AddComputersToDB(database, importedComputers);
-                }
-                else if (Choice == 2) {
+                        // Inserting Computers to DB Table
 
-                    //Adding data to computer list
-                    using(var reader = Database.SelectComputersFromDB(database)) {
-                        while (reader.Read()) {
-                            var computer = new Computer();
-                            computer.Computer_Name = reader.GetString(0);
-                            computer.Building = reader.GetString(1);
-                            computer.Physical_Machine = reader.GetBoolean(2);
-                            computer.Active = reader.GetBoolean(3);
+                        Database.AddComputersToDB(database, importedComputers);
+                    }
+                    else if (choice == 2) {
 
-                            computerList.Add(computer);
+                        database.DBConnection.Open();
+
+                        //Adding data to computer list
+                        using(var reader = Database.SelectComputersFromDB(database)) {
+                            while (reader.Read()) {
+                                var computer = new Computer();
+                                computer.Computer_Name = reader.GetString(0);
+                                computer.Building = reader.GetString(1);
+                                computer.Physical_Machine = reader.GetBoolean(2);
+                                computer.Active = reader.GetBoolean(3);
+
+                                computerList.Add(computer);
+                            }
                         }
+
+                        using(var reader = Database.SelectComputersFromDB(database)) {
+
+                            if (computerList.Count > 0) {
+                                // Grouping by building
+                                Computer.ShowComputerCountPerBuilding(reader);
+
+                                // Displaying computers
+                                Computer.DisplayListOfComputers(computerList, database);
+                            }
+                            else {
+                                Console.Clear();
+                                Console.WriteLine();
+                                ConsoleView.SetColors(ConsoleColor.Yellow);
+                                Console.WriteLine("No Computers in DB");
+                                ConsoleView.ResetColor();
+                            }
+                        }
+
+                        database.DBConnection.Close();
+                    }
+                    else if (choice == 3) {
+                        Database.AddDBRecord(database);
+                    }
+                    else if (choice == 4) {
+                        Database.UupdateDBRecord(database);
+                    }
+                    else if (choice == 5) {
+                        Database.DeleteDBRecord(database);
+                    }
+                    else if (choice == 6) {
+                        Database.CreateDBFile(database);
+                        Database.CreateComputersTable(database);
+                    }
+                    else if (choice == 7) {
+                        Database.DeleteDBFile(database);
+                    }
+                    else if (choice == 8) {
+                        database.DBConnection.Close();
+                        Environment.Exit(1);
                     }
 
-                    // Grouping by building
-                    using(var reader = Database.SelectComputersFromDB(database)) {
-                        Computer.ShowComputerCountPerBuilding(reader);
-                    }
-
-                    // Displaying computers
-                    Computer.DisplayListOfComputers(computerList, database);
+                    Console.WriteLine();
+                    Console.WriteLine("Press ANY Key to return to Main Menu.");
+                    Console.ReadKey();
                 }
-                else if (Choice == 3) {
-
-                    Database.AddDBRecord(database);
-                }
-                else if (Choice == 4) {
-
-                    Database.UupdateDBRecord(database);
-                }
-                else if (Choice == 5) {
-
-                    Database.DeleteDBRecord(database);
-                }
-                else if (Choice == 6) {
-
-                    Database.DeleteDBFile(database);
-                }
-                else if (Choice == 7) {
-
-                    database.DBConnection.Close();
-                    Environment.Exit(1);
-                }
-
-                // Closing DB Connection
-                database.DBConnection.Close();
-
-                Console.WriteLine();
-                Console.WriteLine();
-                Console.WriteLine("Press ANY Key to close window.");
-                Console.ReadKey();
-                Environment.Exit(1);
             }
             catch (Exception exception) {
 
