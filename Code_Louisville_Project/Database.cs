@@ -91,6 +91,33 @@ namespace Final_Project {
             }
         }
 
+        public static string CheckComputerTableExist(Database database) {
+
+            using(var command = new SQLiteCommand(database.CheckTableExist, database.DBConnection)) {
+
+                var checkTableExist = "";
+
+                if (File.Exists(database.FileName)) {
+                    database.DBConnection.Open();
+                    var tableName = command.ExecuteScalar();
+                    database.DBConnection.Close();
+
+                    if (tableName == null) {
+                        checkTableExist = "Missing";
+                        return checkTableExist;
+                    }
+                    else {
+                        checkTableExist = "Exist";
+                        return checkTableExist;
+                    }
+                }
+
+                checkTableExist = "File Missing";
+                return checkTableExist;
+
+            }
+        }
+
         public static void DeleteDBFile(Database database) {
 
             Console.Clear();

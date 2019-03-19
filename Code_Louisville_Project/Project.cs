@@ -42,6 +42,7 @@ namespace Final_Project {
 
                         //Adding data to computer list
                         using(var reader = Database.SelectComputersFromDB(database)) {
+
                             while (reader.Read()) {
                                 var computer = new Computer();
                                 computer.Computer_Name = reader.GetString(0);

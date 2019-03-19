@@ -96,14 +96,28 @@ namespace Final_Project {
             int choice = 99;
 
             var databaseCheck = Database.CheckDBExist(database);
+            var tableCheck = Database.CheckComputerTableExist(database);
 
             if (databaseCheck == "Exist") {
                 Console.WriteLine();
                 ConsoleView.SetColors(ConsoleColor.Green);
                 Console.Write("Database Exists");
                 ConsoleView.ResetColor();
-                Console.WriteLine(" - No need to create a Database");
 
+                if (tableCheck == "Exist") {
+                    Console.Write(" - ");
+                    ConsoleView.SetColors(ConsoleColor.Green);
+                    Console.Write("Computers Table Exists");
+                    ConsoleView.ResetColor();
+                    Console.WriteLine(" - No need to create a Database");
+                }
+                else if (tableCheck == "Missing") {
+                    Console.Write(" - ");
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.Write("Computer Table Missing");
+                    ConsoleView.ResetColor();
+                    Console.WriteLine(" - Recreate Database before performing any action!");
+                }
             }
             else if (databaseCheck == "Missing") {
                 Console.WriteLine();
