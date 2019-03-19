@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Final_Project {
 
@@ -7,16 +8,19 @@ namespace Final_Project {
 
         static public string DisplayBuildingMenu(List<Computer> ComputerList) {
 
-            var buildingList = Building.GetListOfBuildings(ComputerList);
             string buildingName = "";
             int selectionError = 0;
+
+            var buildingList = Building.GetListOfBuildings(ComputerList);
 
             while (buildingName == "") {
 
                 if (selectionError != 0) {
                     Console.Clear();
                     Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
                     Console.WriteLine("Incorrect selection, please try again...");
+                    ConsoleView.ResetColor();
                     Console.WriteLine();
                 }
 
@@ -32,15 +36,36 @@ namespace Final_Project {
                 }
 
                 ConsoleView.SetColors(ConsoleColor.Yellow);
-                Console.WriteLine(" ALL - All Buildings");
+                Console.Write(" ALL");
+                ConsoleView.ResetColor();
+                Console.WriteLine(" - All Buildings");
                 ConsoleView.ResetColor();
                 Console.WriteLine();
                 if (buildingList.Count > 1) {
-                    Console.Write("Choose option [1-" + buildingList.Count + "] or [ALL] - ");
+                    Console.Write("Choose option [");
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    Console.Write("1");
+                    ConsoleView.ResetColor();
+                    Console.Write("-");
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    Console.Write(buildingList.Count);
+                    ConsoleView.ResetColor();
+                    Console.Write("] or [");
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    Console.Write("ALL");
+                    ConsoleView.ResetColor();
+                    Console.Write("] - ");
                 }
                 else if (buildingList.Count == 1) {
-                    Console.Write("Choose option [1] or [ALL] - ");
-
+                    Console.Write("Choose option [");
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    Console.Write(buildingList[0].Substring(buildingList[0].Length - 1));
+                    ConsoleView.ResetColor();
+                    Console.Write("] or [");
+                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    Console.Write("ALL");
+                    ConsoleView.ResetColor();
+                    Console.Write("] - ");
                 }
                 var buildingSelection = Console.ReadLine().ToUpper();
 
@@ -62,31 +87,57 @@ namespace Final_Project {
             }
 
             return buildingName;
+
         }
 
-        public static int MainMenu() {
+        public static int MainMenu(Database database) {
 
             Console.Clear();
             int choice = 99;
+
+            var databaseCheck = Database.CheckDBExist(database);
+
+            if (databaseCheck == "Exist") {
+                Console.WriteLine();
+                ConsoleView.SetColors(ConsoleColor.Green);
+                Console.Write("Database Exists");
+                ConsoleView.ResetColor();
+                Console.WriteLine(" - No need to create a Database");
+
+            }
+            else if (databaseCheck == "Missing") {
+                Console.WriteLine();
+                ConsoleView.SetColors(ConsoleColor.Magenta);
+                Console.Write("Database Missing");
+                ConsoleView.ResetColor();
+                Console.WriteLine(" - Create a Database before performing any action!");
+            }
 
             while (choice == 99 || choice == 0) {
 
                 if (choice == 0) {
                     Console.Clear();
                     Console.WriteLine();
-                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
                     Console.WriteLine("Incorrect selection. Try again");
+                    Console.WriteLine();
                     ConsoleView.ResetColor();
                 }
 
                 Console.WriteLine();
-                Console.WriteLine("1 - Import Computers from Sample CSV to DB (Currently does not check for Duplicates)");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine("Warning - Importing or Adding Computers does not check for Dupelicates");
+                ConsoleView.ResetColor();
+
+                Console.WriteLine();
+                Console.WriteLine("1 - Import Computers from Sample CSV to DB");
                 Console.WriteLine("2 - View Computers in DB");
-                Console.WriteLine("3 - Add a new computer to DB (Currently does not check for Duplicates)");
+                Console.WriteLine("3 - Add a new computer to DB");
                 Console.WriteLine("4 - Update existing computer in DB (Not Implemented Yet)");
                 Console.WriteLine("5 - Delete a computer from DB (Not Implemented Yet)");
-                Console.WriteLine("6 - Delete Database File (Not working yet)");
-                Console.WriteLine("7 - Nothing (Exits Program)");
+                Console.WriteLine("6 - Create Database File");
+                Console.WriteLine("7 - Delete Database File");
+                Console.WriteLine("8 - Exit Program");
                 Console.WriteLine();
                 ConsoleView.SetColors(ConsoleColor.Yellow);
                 Console.Write("What would you like to do? ");
@@ -113,6 +164,9 @@ namespace Final_Project {
                     return choice = 6;
                 }
                 else if (stringChoice == "7") {
+                    return choice = 7;
+                }
+                else if (stringChoice == "8") {
                     return choice = 7;
                 }
                 else {
