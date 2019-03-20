@@ -14,17 +14,18 @@ namespace Final_Project {
             ConsoleView.ResetColor();
 
             try {
-                // Used for list of Computers
-                var computerList = new List<Computer>();
                 // Creating DB Instance
                 var database = new Database();
                 // Making Connection String
                 database.DBConnection = new SQLiteConnection("Data Source=" + database.FileName + ";Version=3;");
-
+                // Menu Choice variable
                 int choice = 0;
 
                 // Main Menu
                 while (choice != 8) {
+                    // Used for list of Computers
+                    var computerList = new List<Computer>();
+
                     choice = Menu.MainMenu(database);
 
                     if (choice == 1) {
@@ -58,7 +59,7 @@ namespace Final_Project {
 
                             if (computerList.Count > 0) {
                                 // Grouping by building
-                                Computer.ShowComputerCountPerBuilding(reader);
+                                Computer.ShowComputerCountPerBuilding(database);
 
                                 // Displaying computers
                                 Computer.DisplayListOfComputers(computerList, database);

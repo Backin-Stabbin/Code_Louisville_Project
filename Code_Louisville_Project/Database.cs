@@ -243,19 +243,24 @@ namespace Final_Project {
         public static SQLiteDataReader SelectComputersFromDB(Database database) {
 
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
-            return command.ExecuteReader();
+            var executeReader = command.ExecuteReader();
+            command.Dispose();
+            return executeReader;
         }
 
         public static List<string> GetComputerTableHeaders(Database database) {
 
             List<string> computerTableHeaders = new List<string>();
 
-            var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
-            var reader = command.ExecuteReader();
-            var tableSchema = reader.GetSchemaTable();
+            using(var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection)) {
 
-            foreach (DataRow row in tableSchema.Rows) {
-                computerTableHeaders.Add(row["ColumnName"].ToString());
+                using(var reader = command.ExecuteReader()) {
+                    var tableSchema = reader.GetSchemaTable();
+
+                    foreach (DataRow row in tableSchema.Rows) {
+                        computerTableHeaders.Add(row["ColumnName"].ToString());
+                    }
+                }
             }
 
             return computerTableHeaders;
@@ -264,7 +269,6 @@ namespace Final_Project {
         public static void AddDBRecord(Database database) {
 
             database.DBConnection.Open();
-            Console.Clear();
 
             string computerName = "";
             string buildingName = "";
@@ -272,69 +276,157 @@ namespace Final_Project {
             bool? activeStatus = null;
             string boolString = "";
             int buildingNumber = 0;
+            int selectionError = 0;
 
             while (computerName == "" || computerName.Length < 4 || computerName.Substring(0, 1) == "-" ||
-                computerName.Substring(computerName.Length - 1, 1) == "-" || computerName.IndexOf("-") < 0
+                computerName.Substring(computerName.Length - 1, 1) == "-" || computerName.IndexOf("-") < 0 || computerName.IndexOf(" ") >= 0
             ) {
                 Console.Clear();
+
+                if (selectionError != 0) {
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection, please try again...");
+                    ConsoleView.ResetColor();
+                }
+
                 Console.WriteLine();
-                Console.Write("Enter Computer Name (Must have a hyphen): ");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine("Name Rquirements:");
+                ConsoleView.ResetColor();
+                Console.WriteLine("- Must have atleast 1 hyphen");
+                Console.WriteLine("- Cannot begin or end with a hyphen");
+                Console.WriteLine("- Cannot be blank or contain a space");
+                Console.WriteLine("- Must be atleast 4 characters long");
+                Console.WriteLine();
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("Example");
+                ConsoleView.ResetColor();
+                Console.WriteLine(" - COMPUTER-123");
+                Console.WriteLine();
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("Enter Computer Name: ");
+                ConsoleView.ResetColor();
                 computerName = Console.ReadLine().ToUpper();
+
+                if (computerName == "" || computerName.Length < 4 || computerName.Substring(0, 1) == "-" ||
+                    computerName.Substring(computerName.Length - 1, 1) == "-" || computerName.IndexOf("-") < 0 || computerName.IndexOf(" ") >= 0
+                ) {
+                    computerName = "";
+                    selectionError = 1;
+                }
+                else {
+                    selectionError = 0;
+                }
             }
 
             while (buildingName == "") {
                 Console.Clear();
+
+                if (selectionError != 0) {
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection, please try again...");
+                    ConsoleView.ResetColor();
+                }
+
                 Console.WriteLine();
-                Console.Write("Enter Building NUmber [1-9]: ");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine("Building Rquirement:");
+                ConsoleView.ResetColor();
+                Console.WriteLine("- Must be single digit number 1-9");
+                Console.WriteLine();
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("Enter Building NUmber: ");
+                ConsoleView.ResetColor();
                 buildingName = Console.ReadLine();
                 try {
                     buildingNumber = Convert.ToInt16(buildingName);
                     if (buildingNumber >= 1 && buildingNumber <= 9) {
                         buildingName = "BLDG" + buildingNumber;
+                        selectionError = 0;
                     }
                     else {
                         buildingName = "";
+                        selectionError = 1;
                     }
                 }
                 catch {
                     buildingName = "";
+                    selectionError = 1;
                 }
-
             }
             while (boolString != "Y" && boolString != "N") {
                 Console.Clear();
+
+                if (selectionError != 0) {
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection, please try again...");
+                    ConsoleView.ResetColor();
+                }
+
                 Console.WriteLine();
-                Console.Write("Is this computer a physical machine. [Y] or [N]? ");
+                Console.Write("Is this computer a Physical Machine. [");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("Y");
+                ConsoleView.ResetColor();
+                Console.Write("] or [");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("N");
+                ConsoleView.ResetColor();
+                Console.Write("]? ");
                 boolString = Console.ReadLine().ToUpper();
 
                 if (boolString == "Y") {
                     physicalMachine = true;
+                    selectionError = 0;
                 }
                 else if (boolString == "N") {
                     physicalMachine = false;
+                    selectionError = 0;
                 }
                 else {
                     physicalMachine = null;
+                    selectionError = 1;
                 }
-
             }
 
             boolString = "";
 
             while (boolString != "Y" && boolString != "N") {
                 Console.Clear();
+
+                if (selectionError != 0) {
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection, please try again...");
+                    ConsoleView.ResetColor();
+                }
+
                 Console.WriteLine();
-                Console.Write("Is this computer an active machine. [Y] or [N]? ");
+                Console.Write("Is this computer a Active Machine. [");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("Y");
+                ConsoleView.ResetColor();
+                Console.Write("] or [");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write("N");
+                ConsoleView.ResetColor();
+                Console.Write("]? ");
                 boolString = Console.ReadLine().ToUpper();
 
                 if (boolString == "Y") {
                     activeStatus = true;
+                    selectionError = 0;
                 }
                 else if (boolString == "N") {
                     activeStatus = false;
+                    selectionError = 0;
                 }
                 else {
                     activeStatus = null;
+                    selectionError = 1;
                 }
             }
 
@@ -343,10 +435,8 @@ namespace Final_Project {
                 computerName + "','" + buildingName + "'," + physicalMachine + "," + activeStatus + ");";
 
             using(var sqlCommand = new SQLiteCommand(query, database.DBConnection)) {
-
                 sqlCommand.ExecuteNonQuery();
             }
-
             database.DBConnection.Close();
         }
 

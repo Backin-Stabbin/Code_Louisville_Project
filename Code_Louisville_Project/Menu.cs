@@ -42,13 +42,9 @@ namespace Final_Project {
                 ConsoleView.ResetColor();
                 Console.WriteLine();
                 if (buildingList.Count > 1) {
-                    Console.Write("Choose option [");
+                    Console.Write("Choose [");
                     ConsoleView.SetColors(ConsoleColor.Yellow);
-                    Console.Write("1");
-                    ConsoleView.ResetColor();
-                    Console.Write("-");
-                    ConsoleView.SetColors(ConsoleColor.Yellow);
-                    Console.Write(buildingList.Count);
+                    Console.Write("Building Number");
                     ConsoleView.ResetColor();
                     Console.Write("] or [");
                     ConsoleView.SetColors(ConsoleColor.Yellow);
