@@ -32,6 +32,7 @@ namespace Final_Project {
 
             var selectedComputers = SelectComputersFromBuilding(computerList);
             var computerHeaders = Database.GetComputerTableHeaders(database);
+
             Console.Clear();
 
             if (selectedComputers.Count > 0) {
@@ -106,26 +107,31 @@ namespace Final_Project {
             return importedComputers;
         }
 
-        public static void ShowComputerCountPerBuilding(SQLiteDataReader reader) {
+        public static void ShowComputerCountPerBuilding(Database database) {
 
             var computers = new List<Computer>();
+            var buildingList = new List<string>();
+
             Console.Clear();
 
             ConsoleView.SetColors(ConsoleColor.Yellow);
             Console.WriteLine("Computers per Building");
             ConsoleView.ResetColor();
 
-            while (reader.Read()) {
-                var computer = new Computer();
-                computer.Computer_Name = reader.GetString(0);
-                computer.Building = reader.GetString(1);
-                computer.Physical_Machine = reader.GetBoolean(2);
-                computer.Active = reader.GetBoolean(3);
+            using(var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection)) {
 
-                computers.Add(computer);
+                using(var reader = command.ExecuteReader()) {
+                    while (reader.Read()) {
+                        var computer = new Computer();
+                        computer.Computer_Name = reader.GetString(0);
+                        computer.Building = reader.GetString(1);
+                        computer.Physical_Machine = reader.GetBoolean(2);
+                        computer.Active = reader.GetBoolean(3);
+
+                        computers.Add(computer);
+                    }
+                }
             }
-
-            var buildingList = new List<string>();
 
             var uniqueBuildings = computers.GroupBy(computer => computer.Building).ToList();
 
@@ -145,19 +151,38 @@ namespace Final_Project {
         public static string ChangeComputerName(string oldComputerName) {
 
             string newComputerName = "";
-            Console.WriteLine();
-            Console.WriteLine("Please choose a new name for your computers.");
-            Console.Write("Currently your computers are named like - ");
-            ConsoleView.SetColors(ConsoleColor.Yellow);
-            Console.WriteLine(oldComputerName);
-            ConsoleView.ResetColor();
-            Console.WriteLine();
-            Console.Write("Enter new name to replace ");
-            ConsoleView.SetColors(ConsoleColor.Yellow);
-            Console.Write(oldComputerName.Split("-") [0]);
-            ConsoleView.ResetColor();
-            Console.Write(": ");
-            newComputerName = Console.ReadLine();
+            int selectionError = 0;
+
+            while (newComputerName == "") {
+
+                if (selectionError != 0) {
+                    Console.Clear();
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection, please try again...");
+                    ConsoleView.ResetColor();
+                    Console.WriteLine();
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("Please choose a new name for your computers.");
+                Console.Write("Currently your computers are named like - ");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.WriteLine(oldComputerName);
+                ConsoleView.ResetColor();
+                Console.WriteLine();
+                Console.Write("Enter new name to replace ");
+                ConsoleView.SetColors(ConsoleColor.Yellow);
+                Console.Write(oldComputerName.Split("-") [0]);
+                ConsoleView.ResetColor();
+                Console.Write(": ");
+                newComputerName = Console.ReadLine();
+
+                if (newComputerName.IndexOf(" ") >= 0 || newComputerName == "") {
+                    newComputerName = "";
+                    selectionError = 1;
+                }
+            }
 
             return newComputerName;
         }
