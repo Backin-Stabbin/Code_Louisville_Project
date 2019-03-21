@@ -62,49 +62,55 @@ namespace Final_Project {
 
         public static List<Computer> ImportComputersFromCSV(string fileName, Database database) {
 
-            database.DBConnection.Open();
-
-            Console.Clear();
             var importedComputers = new List<Computer>();
-            int currentProgress = 0;
-            int totalComputers = 0;
 
-            using(var reader = new StreamReader(File.OpenRead(fileName))) {
-                reader.ReadLine();
-                while (reader.ReadLine() != null) {
-                    totalComputers = totalComputers + 1;
+            if (File.Exists(database.FileName)) {
+
+                Console.Clear();
+                int currentProgress = 0;
+                int totalComputers = 0;
+
+                using(var reader = new StreamReader(File.OpenRead(fileName))) {
+                    reader.ReadLine();
+                    while (reader.ReadLine() != null) {
+                        totalComputers = totalComputers + 1;
+                    }
                 }
+
+                Console.WriteLine("Identifying computers in CSV...");
+
+                using(var reader = new StreamReader(File.OpenRead(fileName))) {
+
+                    reader.ReadLine();
+
+                    while (!reader.EndOfStream) {
+                        var computer = new Computer();
+                        var line = reader.ReadLine().Split(",");
+
+                        computer.Computer_Name = line[0].ToUpper();
+                        computer.Building = line[1];
+                        computer.Physical_Machine = Convert.ToBoolean(line[2]);
+                        computer.Active = Convert.ToBoolean(line[3]);
+
+                        importedComputers.Add(computer);
+
+                        ProgressBar.ShowProgressBar(currentProgress, totalComputers);
+                        currentProgress = currentProgress + 1;
+
+                    }
+                }
+
+                Console.WriteLine();
+                Console.WriteLine("Identification complete");
+                Console.WriteLine();
+
+                return importedComputers;
+
+            }
+            else {
+                return importedComputers;
             }
 
-            Console.WriteLine("Identifying computers in CSV...");
-
-            using(var reader = new StreamReader(File.OpenRead(fileName))) {
-
-                reader.ReadLine();
-
-                while (!reader.EndOfStream) {
-                    var computer = new Computer();
-                    var line = reader.ReadLine().Split(",");
-
-                    computer.Computer_Name = line[0].ToUpper();
-                    computer.Building = line[1];
-                    computer.Physical_Machine = Convert.ToBoolean(line[2]);
-                    computer.Active = Convert.ToBoolean(line[3]);
-
-                    importedComputers.Add(computer);
-
-                    ProgressBar.ShowProgressBar(currentProgress, totalComputers);
-                    currentProgress = currentProgress + 1;
-
-                }
-            }
-
-            Console.WriteLine();
-            Console.WriteLine("Identification complete");
-            Console.WriteLine();
-
-            database.DBConnection.Close();
-            return importedComputers;
         }
 
         public static void ShowComputerCountPerBuilding(Database database) {

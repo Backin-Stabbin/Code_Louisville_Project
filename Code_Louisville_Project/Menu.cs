@@ -86,13 +86,21 @@ namespace Final_Project {
 
         }
 
-        public static int MainMenu(Database database) {
+        public static int MainMenu(Database database, string selectionError) {
 
             int choice = 99;
 
             while (choice == 99 || choice == 0) {
 
                 Console.Clear();
+
+                if (selectionError == "DBMissing") {
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection, please try again!!");
+                    ConsoleView.ResetColor();
+
+                }
 
                 var databaseCheck = Database.CheckDBExist(database);
                 var tableCheck = Database.CheckComputerTableExist(database);
