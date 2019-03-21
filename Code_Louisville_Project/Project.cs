@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using System.IO;
 
 namespace Final_Project {
 
@@ -21,12 +22,14 @@ namespace Final_Project {
                 // Menu Choice variable
                 int choice = 0;
 
+                string selectionError = "";
+
                 // Main Menu
                 while (choice != 8) {
                     // Used for list of Computers
                     var computerList = new List<Computer>();
 
-                    choice = Menu.MainMenu(database);
+                    choice = Menu.MainMenu(database, selectionError);
 
                     if (choice == 1) {
 
@@ -34,62 +37,94 @@ namespace Final_Project {
                         var importedComputers = Computer.ImportComputersFromCSV("Sample_Computers.csv", database);
 
                         // Inserting Computers to DB Table
-
-                        Database.AddComputersToDB(database, importedComputers);
+                        if (importedComputers.Count > 0) {
+                            Database.AddComputersToDB(database, importedComputers);
+                        }
+                        else {
+                            selectionError = "DBMissing";
+                            continue;
+                        }
                     }
                     else if (choice == 2) {
 
-                        database.DBConnection.Open();
+                        if (File.Exists(database.FileName)) {
+                            database.DBConnection.Open();
 
-                        //Adding data to computer list
-                        using(var reader = Database.SelectComputersFromDB(database)) {
+                            //Adding data to computer list
+                            using(var reader = Database.SelectComputersFromDB(database)) {
 
-                            while (reader.Read()) {
-                                var computer = new Computer();
-                                computer.Computer_Name = reader.GetString(0);
-                                computer.Building = reader.GetString(1);
-                                computer.Physical_Machine = reader.GetBoolean(2);
-                                computer.Active = reader.GetBoolean(3);
+                                while (reader.Read()) {
+                                    var computer = new Computer();
+                                    computer.Computer_Name = reader.GetString(0);
+                                    computer.Building = reader.GetString(1);
+                                    computer.Physical_Machine = reader.GetBoolean(2);
+                                    computer.Active = reader.GetBoolean(3);
 
-                                computerList.Add(computer);
+                                    computerList.Add(computer);
+                                }
                             }
+
+                            using(var reader = Database.SelectComputersFromDB(database)) {
+
+                                if (computerList.Count > 0) {
+                                    // Grouping by building
+                                    Computer.ShowComputerCountPerBuilding(database);
+
+                                    // Displaying computers
+                                    Computer.DisplayListOfComputers(computerList, database);
+                                }
+                                else {
+                                    Console.Clear();
+                                    Console.WriteLine();
+                                    ConsoleView.SetColors(ConsoleColor.Yellow);
+                                    Console.WriteLine("No Computers in DB");
+                                    ConsoleView.ResetColor();
+                                }
+                            }
+
+                            database.DBConnection.Close();
+                        }
+                        else {
+                            selectionError = "DBMissing";
+                            continue;
                         }
 
-                        using(var reader = Database.SelectComputersFromDB(database)) {
-
-                            if (computerList.Count > 0) {
-                                // Grouping by building
-                                Computer.ShowComputerCountPerBuilding(database);
-
-                                // Displaying computers
-                                Computer.DisplayListOfComputers(computerList, database);
-                            }
-                            else {
-                                Console.Clear();
-                                Console.WriteLine();
-                                ConsoleView.SetColors(ConsoleColor.Yellow);
-                                Console.WriteLine("No Computers in DB");
-                                ConsoleView.ResetColor();
-                            }
-                        }
-
-                        database.DBConnection.Close();
                     }
                     else if (choice == 3) {
-                        Database.AddDBRecord(database);
+                        if (File.Exists(database.FileName)) {
+                            Database.AddDBRecord(database);
+                        }
+                        else {
+                            selectionError = "DBMissing";
+                            continue;
+                        }
                     }
                     else if (choice == 4) {
-                        Database.UupdateDBRecord(database);
+                        if (File.Exists(database.FileName)) {
+                            Database.UupdateDBRecord(database);
+                        }
+                        else {
+                            selectionError = "DBMissing";
+                            continue;
+                        }
                     }
                     else if (choice == 5) {
-                        Database.DeleteDBRecord(database);
+                        if (File.Exists(database.FileName)) {
+                            Database.DeleteDBRecord(database);
+                        }
+                        else {
+                            selectionError = "DBMissing";
+                            continue;
+                        }
                     }
                     else if (choice == 6) {
                         Database.CreateDBFile(database);
                         Database.CreateComputersTable(database);
+                        selectionError = "";
                     }
                     else if (choice == 7) {
                         Database.DeleteDBFile(database);
+                        selectionError = "";
                     }
                     else if (choice == 8) {
                         Environment.Exit(1);
