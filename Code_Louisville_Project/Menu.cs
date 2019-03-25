@@ -6,7 +6,8 @@ namespace Final_Project {
 
     public class Menu {
 
-        static public string DisplayBuildingMenu(List<Computer> ComputerList) {
+        // Prompts for choosing a building
+        public static string DisplayBuildingMenu(List<Computer> ComputerList) {
 
             string buildingName = "";
             int selectionError = 0;
@@ -86,6 +87,7 @@ namespace Final_Project {
 
         }
 
+        // This is the main menu of the applications
         public static int MainMenu(Database database, string selectionError) {
 
             int choice = 99;
@@ -94,10 +96,17 @@ namespace Final_Project {
 
                 Console.Clear();
 
-                if (selectionError == "DBMissing") {
+                if (selectionError == "Missing") {
                     Console.WriteLine();
                     ConsoleView.SetColors(ConsoleColor.Magenta);
-                    Console.WriteLine("Incorrect selection, please try again!!");
+                    Console.WriteLine("Incorrect selection - Computers Table is still missing!!");
+                    ConsoleView.ResetColor();
+
+                }
+                else if (selectionError == "File Missing") {
+                    Console.WriteLine();
+                    ConsoleView.SetColors(ConsoleColor.Magenta);
+                    Console.WriteLine("Incorrect selection - Database is still missing!!");
                     ConsoleView.ResetColor();
 
                 }
