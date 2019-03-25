@@ -1,3 +1,9 @@
+/*
+    This is the Computer Class
+
+    Gives ability to create a simple computer object and several methods dealing with computers
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
@@ -8,15 +14,19 @@ namespace Final_Project {
 
     public class Computer {
 
+        // Computer attributes
         public string Computer_Name;
         public string Building;
         public bool Physical_Machine;
         public bool Active;
 
+        // Basic computer constructor
         public Computer computer { get; set; }
 
+        // Returns a list of computers that will be displayed to user after selecting what they would like to see
         public static List<Computer> SelectComputersFromBuilding(List<Computer> computerList) {
 
+            // Generates the building menu to show them what is available and their options
             var selectedBuilding = Menu.DisplayBuildingMenu(computerList);
 
             if (selectedBuilding == "ALL") {
@@ -28,13 +38,17 @@ namespace Final_Project {
             }
         }
 
+        // Displays a list of the selected computers after choosing a building or showing them all
         public static void DisplayListOfComputers(List<Computer> computerList, Database database) {
 
+            // Collects the list of computers that will be shown
             var selectedComputers = SelectComputersFromBuilding(computerList);
+            // Gets the column headers for displaying the results for easy identification
             var computerHeaders = Database.GetComputerTableHeaders(database);
 
             Console.Clear();
 
+            // This is the way the computers are displayed as long as there is atleast 1 result
             if (selectedComputers.Count > 0) {
                 ConsoleView.SetColors(ConsoleColor.Yellow);
                 Console.WriteLine(string.Format("{0} {1} {2,-20} {3,-10}",
@@ -53,6 +67,7 @@ namespace Final_Project {
                 ConsoleView.ResetColor();
                 Console.WriteLine(selectedComputers.Count);
             }
+            // If there are no results possible to show, it will display no results
             else {
                 ConsoleView.SetColors(ConsoleColor.Yellow);
                 Console.WriteLine("No Results to display");
@@ -60,6 +75,7 @@ namespace Final_Project {
             }
         }
 
+        // Identifies computers in CSV
         public static List<Computer> ImportComputersFromCSV(string fileName, Database database) {
 
             var importedComputers = new List<Computer>();
@@ -113,6 +129,7 @@ namespace Final_Project {
 
         }
 
+        // Displays number of computers per building
         public static void ShowComputerCountPerBuilding(Database database) {
 
             var computers = new List<Computer>();
@@ -154,6 +171,7 @@ namespace Final_Project {
             Console.WriteLine();
         }
 
+        // Used to change the computer name when importing CSV
         public static string ChangeComputerName(string oldComputerName) {
 
             string newComputerName = "";

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
-using System.IO;
 
 namespace Final_Project {
 
@@ -9,7 +8,7 @@ namespace Final_Project {
 
         static void Main() {
 
-            Console.Title = "Code Louisville C# / .NET Project";
+            Console.Title = "Code Louisville C# / .NET Final Project";
             Console.Clear();
             Console.WriteLine();
             ConsoleView.ResetColor();
@@ -21,7 +20,7 @@ namespace Final_Project {
                 database.DBConnection = new SQLiteConnection("Data Source=" + database.FileName + ";Version=3;");
                 // Menu Choice variable
                 int choice = 0;
-
+                // Used to identify Errors to display
                 string selectionError = "";
 
                 // Main Menu
@@ -29,28 +28,32 @@ namespace Final_Project {
                     // Used for list of Computers
                     var computerList = new List<Computer>();
 
+                    // Selected menu choice
                     choice = Menu.MainMenu(database, selectionError);
 
+                    // Chosen if you want to import computers from CSV
                     if (choice == 1) {
+                        if (Database.CheckComputerTableExist(database) == "Exist") {
 
-                        // Importing Computer List
-                        var importedComputers = Computer.ImportComputersFromCSV("Sample_Computers.csv", database);
+                            var importedComputers = Computer.ImportComputersFromCSV("Sample_Computers.csv", database);
 
-                        // Inserting Computers to DB Table
-                        if (importedComputers.Count > 0) {
                             Database.AddComputersToDB(database, importedComputers);
                         }
-                        else {
-                            selectionError = "DBMissing";
+                        else if (Database.CheckComputerTableExist(database) == "Missing") {
+                            selectionError = "Missing";
+                            continue;
+                        }
+                        else if (Database.CheckComputerTableExist(database) == "File Missing") {
+                            selectionError = "File Missing";
                             continue;
                         }
                     }
+                    // Chosen to select computers from DB
                     else if (choice == 2) {
 
-                        if (File.Exists(database.FileName)) {
+                        if (Database.CheckComputerTableExist(database) == "Exist") {
                             database.DBConnection.Open();
 
-                            //Adding data to computer list
                             using(var reader = Database.SelectComputersFromDB(database)) {
 
                                 while (reader.Read()) {
@@ -67,10 +70,9 @@ namespace Final_Project {
                             using(var reader = Database.SelectComputersFromDB(database)) {
 
                                 if (computerList.Count > 0) {
-                                    // Grouping by building
+
                                     Computer.ShowComputerCountPerBuilding(database);
 
-                                    // Displaying computers
                                     Computer.DisplayListOfComputers(computerList, database);
                                 }
                                 else {
@@ -84,48 +86,70 @@ namespace Final_Project {
 
                             database.DBConnection.Close();
                         }
-                        else {
-                            selectionError = "DBMissing";
+                        else if (Database.CheckComputerTableExist(database) == "Missing") {
+                            selectionError = "Missing";
+                            continue;
+                        }
+                        else if (Database.CheckComputerTableExist(database) == "File Missing") {
+                            selectionError = "File Missing";
                             continue;
                         }
 
                     }
+                    // Chosen to add a single computer record
                     else if (choice == 3) {
-                        if (File.Exists(database.FileName)) {
+                        if (Database.CheckComputerTableExist(database) == "Exist") {
                             Database.AddDBRecord(database);
                         }
-                        else {
-                            selectionError = "DBMissing";
+                        else if (Database.CheckComputerTableExist(database) == "Missing") {
+                            selectionError = "Missing";
+                            continue;
+                        }
+                        else if (Database.CheckComputerTableExist(database) == "File Missing") {
+                            selectionError = "File Missing";
                             continue;
                         }
                     }
+                    // Not implemented
                     else if (choice == 4) {
-                        if (File.Exists(database.FileName)) {
+                        if (Database.CheckComputerTableExist(database) == "Exist") {
                             Database.UupdateDBRecord(database);
                         }
-                        else {
-                            selectionError = "DBMissing";
+                        else if (Database.CheckComputerTableExist(database) == "Missing") {
+                            selectionError = "Missing";
+                            continue;
+                        }
+                        else if (Database.CheckComputerTableExist(database) == "File Missing") {
+                            selectionError = "File Missing";
                             continue;
                         }
                     }
+                    // Not implemented
                     else if (choice == 5) {
-                        if (File.Exists(database.FileName)) {
+                        if (Database.CheckComputerTableExist(database) == "Exist") {
                             Database.DeleteDBRecord(database);
                         }
-                        else {
-                            selectionError = "DBMissing";
+                        else if (Database.CheckComputerTableExist(database) == "Missing") {
+                            selectionError = "Missing";
+                            continue;
+                        }
+                        else if (Database.CheckComputerTableExist(database) == "File Missing") {
+                            selectionError = "File Missing";
                             continue;
                         }
                     }
+                    // Will create DB and Computers Table
                     else if (choice == 6) {
                         Database.CreateDBFile(database);
                         Database.CreateComputersTable(database);
                         selectionError = "";
                     }
+                    // Will delete DB
                     else if (choice == 7) {
                         Database.DeleteDBFile(database);
                         selectionError = "";
                     }
+                    // Exits program
                     else if (choice == 8) {
                         Environment.Exit(1);
                     }

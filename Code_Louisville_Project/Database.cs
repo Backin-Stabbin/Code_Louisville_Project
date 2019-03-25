@@ -1,3 +1,11 @@
+/*
+    This is the Database Class
+
+    Includes a generic constructor for a Database object
+    Includes several queries
+    Includes methods relating to SQLite DB
+*/
+
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,6 +16,7 @@ namespace Final_Project {
 
     public class Database {
 
+        // Variables
         public SQLiteConnection DBConnection;
         public string FileName = "Computer_Data.sqlite";
         public string CreateTableQuery = @"
@@ -36,8 +45,10 @@ namespace Final_Project {
                 Name='Computers'
             ";
 
+        // Simple constructor
         public Database database { get; set; }
 
+        // Will create SQLite DB File
         public static void CreateDBFile(Database database) {
 
             Console.Clear();
@@ -77,6 +88,7 @@ namespace Final_Project {
             }
         }
 
+        // Will check if DB exists
         public static string CheckDBExist(Database database) {
 
             string databaseCheck = "";
@@ -91,6 +103,7 @@ namespace Final_Project {
             }
         }
 
+        // Will check is Computers table exists
         public static string CheckComputerTableExist(Database database) {
 
             using(var command = new SQLiteCommand(database.CheckTableExist, database.DBConnection)) {
@@ -118,6 +131,7 @@ namespace Final_Project {
             }
         }
 
+        // Deletes DB File
         public static void DeleteDBFile(Database database) {
 
             Console.Clear();
@@ -151,6 +165,7 @@ namespace Final_Project {
             }
         }
 
+        // Creates Computers Table
         public static void CreateComputersTable(Database database) {
 
             database.DBConnection.Open();
@@ -200,6 +215,7 @@ namespace Final_Project {
             database.DBConnection.Close();
         }
 
+        // Will prompt for computer name changes and then add to DB
         public static void AddComputersToDB(Database database, List<Computer> computerList) {
 
             string insertCommandString = "INSERT INTO Computers (Computer_Name, Building, Physical_Machine, Active) VALUES ";
@@ -240,6 +256,7 @@ namespace Final_Project {
 
         }
 
+        // Will start the process for selecting computers from DB
         public static SQLiteDataReader SelectComputersFromDB(Database database) {
 
             var command = new SQLiteCommand(database.SelectDataQuery, database.DBConnection);
@@ -248,6 +265,7 @@ namespace Final_Project {
             return executeReader;
         }
 
+        // Gathers list of all headers in Computers Table
         public static List<string> GetComputerTableHeaders(Database database) {
 
             List<string> computerTableHeaders = new List<string>();
@@ -266,6 +284,7 @@ namespace Final_Project {
             return computerTableHeaders;
         }
 
+        // Will allow adding of one DB Record
         public static void AddDBRecord(Database database) {
 
             database.DBConnection.Open();

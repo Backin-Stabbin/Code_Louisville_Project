@@ -1,3 +1,9 @@
+/*
+    This is the Progress Bar Class
+
+    Will show a graphical display when identifying computers
+*/
+
 using System;
 
 namespace Final_Project {
@@ -6,6 +12,7 @@ namespace Final_Project {
 
         public ProgressBar progressBar { get; set; }
 
+        // shows a progress bar
         public static void ShowProgressBar(int currentProgress, int itemTotal) {
 
             int barLength = itemTotal;
