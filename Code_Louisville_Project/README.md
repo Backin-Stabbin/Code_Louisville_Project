@@ -1,6 +1,8 @@
 
 ### This is the Computers and SQLite Project
 
+This ReadMe is a work in progress.
+
 #### Demonstrates understanding of C# in use with SQLite
 
 - Prerequisites:
