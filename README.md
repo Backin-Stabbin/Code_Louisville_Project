@@ -1,7 +1,7 @@
 # Code_Louisville_Project
 **Managed by Clayton Lewis** - Used for Code Louisville Classes and Resume Examples
 
-- Computers and SQLite Project is [HERE](https://github.com/Clayton-GitHub/Code_Louisville/tree/Master-PROD/Code_Louisville_Project)
+- Computers and SQLite Project is [HERE](https://github.com/Clayton-GitHub/Public/tree/Master-PROD/Computers_and_SQLite)
   - This is a sample program dealing with managing computers within a Database with a console application
   - You can import a CSV file and rename the computers
   - You can add a computer of your choice
